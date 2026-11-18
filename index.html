@@ -128,12 +128,12 @@ header nav a[aria-current=true]{color:var(--blue);font-weight:700;box-shadow:ins
 .pill-note{display:block;margin:16px auto 0;font:500 12.5px/1.5 var(--mono);color:var(--ink-faint);text-align:center}
 .hero-stats{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;margin-top:clamp(32px,4vw,48px);
   background:var(--hair);border:1px solid var(--hair);border-radius:12px;overflow:hidden;text-align:center}
-.hero-stat{background:var(--paper);padding:17px 14px}
+.hero-stat{background:var(--paper);padding:17px 14px;display:flex;flex-direction:column}
 .hero-stat b{display:block;font-family:var(--display);font-weight:700;font-size:clamp(22px,2.4vw,30px);
   line-height:1;letter-spacing:-.018em;color:var(--blue)}
 .hero-stat span{display:block;margin-top:9px;font:700 10.5px/1.4 var(--mono);letter-spacing:.07em;
   text-transform:uppercase;color:var(--ink)}
-.hero-stat em{display:block;margin-top:5px;font-style:normal;font-size:12px;line-height:1.4;color:var(--ink-faint)}
+.hero-stat em{display:block;margin-top:auto;padding-top:5px;font-style:normal;font-size:12px;line-height:1.4;color:var(--ink-faint)}
 
 /* ─── blocks ─── */
 .block{max-width:1200px;margin:0 auto;padding:clamp(60px,6.6vw,100px) clamp(20px,4vw,40px);border-top:1px solid var(--hair)}
@@ -202,6 +202,13 @@ h3{font-size:clamp(19px,2vw,25px)}
 .table-module .covbar{height:7px;width:calc(var(--v)*1.6px + 2px);background:var(--amber);border-radius:2px;flex:none}
 .table-module .covnum{min-width:3.1em;text-align:right}
 .table-module td.covcell{padding-right:9px}
+/* Track divider inside a long section: the reader needs to know which half
+   of the experiment a table belongs to before reading 14 columns of it. */
+h3.track{font:600 clamp(21px,2.1vw,27px)/1.26 var(--display);letter-spacing:-.012em;
+  color:var(--ink);margin:clamp(52px,5.6vw,84px) 0 10px;padding-top:clamp(26px,2.8vw,38px);
+  border-top:2px solid var(--ink);display:block;max-width:none}
+h3.track:first-of-type{margin-top:clamp(40px,4.4vw,60px)}
+@media (max-width:720px){h3.track{margin-top:44px;padding-top:22px}}
 .table-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;font:500 11.5px/1.5 var(--mono);color:var(--ink-faint)}
 .table-legend b{color:var(--ink)}
 .table-legend b::after{content:"\00a0\25B2";font-size:.62em;vertical-align:.32em;color:var(--ok-ink)}
@@ -210,12 +217,29 @@ h3{font-size:clamp(19px,2vw,25px)}
 /* ─── figures ─── */
 figure{margin:0}
 .fig{margin:clamp(32px,3.8vw,50px) 0 0}
+.fig-tall{max-width:720px;margin-inline:auto}
+.fig-mid{max-width:900px;margin-inline:auto}
 .fig-open{display:block;width:100%;padding:0;border:1px solid var(--hair);border-radius:12px;
   background:var(--paper);cursor:zoom-in;overflow:hidden}
 .fig-open:hover{border-color:var(--blue-edge)}
 .fig-open img{display:block;width:100%;height:auto}
 .fig figcaption{font-size:13px;line-height:1.55;color:var(--ink-faint);margin-top:12px;max-width:92ch}
 .fig-id{font:700 11.5px/1.4 var(--mono);color:var(--ink-soft);letter-spacing:.03em}
+
+/* ─── four short properties, read as one row rather than a stranded column ─── */
+.props{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hair);
+  border:1px solid var(--hair);border-radius:12px;overflow:hidden;margin-top:clamp(30px,3.4vw,44px)}
+.props>div{background:var(--paper);padding:19px 20px}
+.props h3{font-family:var(--sans);font-size:14.5px;font-weight:700;line-height:1.35;color:var(--ink);margin:0}
+.props p{margin:9px 0 0;font-size:13.5px;line-height:1.52;color:var(--ink-faint)}
+.props .n{display:block;font:700 11px/1 var(--mono);color:var(--blue);margin-bottom:11px;letter-spacing:.06em}
+
+/* ─── a run of instrument-check tables, introduced once ─── */
+.table-group{margin-top:clamp(34px,4vw,52px)}
+.table-group>.table-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(26px,3vw,46px);align-items:start}
+.table-group .table-module{margin:0}
+.table-group .table-insight{font-size:clamp(16px,1.6vw,18.5px);margin-bottom:13px}
 
 /* ─── panels, lists, cards ─── */
 .panel{background:var(--paper);border:1px solid var(--hair);border-radius:14px;padding:clamp(20px,2.6vw,30px)}
@@ -464,6 +488,8 @@ section[id]{scroll-margin-top:72px}
 @media (max-width:1080px){.dt{--dt-gap:118px}}
 @media (max-width:960px){
   .columns-2{grid-template-columns:minmax(0,1fr)}
+  .props{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .table-group>.table-grid{grid-template-columns:minmax(0,1fr);gap:clamp(34px,4vw,52px)}
   .table-pair,.table-side{grid-template-columns:minmax(0,1fr);gap:clamp(34px,4vw,52px)}
   .triad{grid-template-columns:minmax(0,1fr)}
   .numbers{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -511,6 +537,7 @@ section[id]{scroll-margin-top:72px}
 }
 @media (max-width:720px){
   body{font-size:16px}
+  .props{grid-template-columns:minmax(0,1fr)}
   .hero-stats{grid-template-columns:repeat(2,1fr)}
   .numbers{grid-template-columns:minmax(0,1fr)}
   .ba{grid-template-columns:minmax(0,1fr)}
@@ -572,7 +599,7 @@ section[id]{scroll-margin-top:72px}
 
 <header>
 <a class="wordmark" href="#hero"><img src="assets/brand/web-logo.png" alt="" aria-hidden="true" width="128" height="128">CoPlay</a>
-<nav aria-label="Primary"><a href="#problem">Problem</a><a href="#benchmark">Benchmark</a><a href="#method">Method</a><a href="#results">Results</a><a href="#cases">Cases</a><a href="#audit">Audit</a><a href="#citation">Citation</a></nav>
+<nav aria-label="Primary"><a href="#problem">Problem</a><a href="#benchmark">Benchmark</a><a href="#scoring">Scoring</a><a href="#method">Method</a><a href="#results">Results</a><a href="#cases">Cases</a><a href="#audit">Audit</a><a href="#limits">Limits</a><a href="#citation">Citation</a></nav>
 </header>
 
 <main id="main">
@@ -589,7 +616,7 @@ section[id]{scroll-margin-top:72px}
 <a class="pill" href="#citation">Citation</a>
 </div>
 <p class="pill-note">Anonymous manuscript &middot; no code, data or model release is stated in it</p>
-<div class="hero-stats"><div class="hero-stat"><b>9</b><span>games</span><em>first-person video</em></div><div class="hero-stat"><b>818</b><span>videos</span><em>97.7 hours of play</em></div><div class="hero-stat"><b>5,153</b><span>events</span><em>each with a window</em></div><div class="hero-stat"><b>34.3%</b><span>StratEmo</span><em>best frontier 14.5%</em></div><div class="hero-stat"><b>+43.7</b><span>TimingLift pp</span><em>best frontier +28.0</em></div><div class="hero-stat"><b>55.1</b><span>GroundF1</span><em>best frontier 42.1</em></div></div>
+<div class="hero-stats"><div class="hero-stat"><b>9</b><span>games</span><em>first-person video</em></div><div class="hero-stat"><b>818</b><span>videos</span><em>97.7 hours of play</em></div><div class="hero-stat"><b>5,153</b><span>events</span><em>each with a window</em></div><div class="hero-stat"><b>34.3%</b><span>of advice both sound and supportive</span><em>best frontier 14.5%</em></div><div class="hero-stat"><b>+43.7</b><span>timing, over a random speaker</span><em>best frontier +28.0</em></div><div class="hero-stat"><b>55.1</b><span>grounded in what is on screen</span><em>best frontier 42.1</em></div></div>
 </div>
 </section>
 
@@ -598,27 +625,20 @@ section[id]{scroll-margin-top:72px}
 <p class="kicker">The gap</p>
 <h2 id="problem-h">A posed question already tells a model when to speak.</h2>
 <div class="lede">
-<p>Video benchmarks have advanced perception and reasoning over complete clips, and online variants move the question into a stream. They evaluate responses to given tasks rather than the decision to intervene, so a model is never penalised for speaking when nothing calls for it. A companion is not a commentator either: it addresses the person playing and must commit before the next decision.</p>
+<p>Video benchmarks pose the question, so they score the answer and never the decision to intervene. A model is never penalised for speaking when nothing calls for it &mdash; and a companion is not a commentator: it addresses the person playing, and must commit before the next decision.</p>
 </div>
 </div>
-<div class="columns-2">
-<div>
-<ul class="notes">
-<li><b>Grounded in what is on screen.</b> An unprompted line has to concern the player's next decision, not describe the scene.</li>
-<li><b>Supportive of this player, now.</b> Support earns credit only when it is tied to the situation and matches the expected tone.</li>
-<li><b>Delivered while the event is still actionable.</b> A window that passes while the model generates counts as missed.</li>
-<li><b>Withheld when silence is better.</b> Required windows cover 7.4% of Bench video time; the rest of the session is quiet.</li>
-</ul>
-<p class="small-note">A correct but late reply and a timely but ungrounded one both fail the player, so content, support and timing have to be scored together.</p>
-</div>
-<div>
-<figure class="fig ">
+<figure class="fig fig-tall">
 <a class="fig-open" href="assets/figures/coplaybench-figure1-spaced.png" aria-label="Open Figure 1 at full size">
-<picture><source srcset="assets/figures/coplaybench-figure1-spaced.webp" type="image/webp"><img src="assets/figures/coplaybench-figure1-spaced.png" width="1250" height="1435" alt="An Honor of Kings teamfight frame, score 6 to 8. A frustrated player says: I haven&#x27;t died once, and we&#x27;re still about to lose. Reply (a), marked not strategy-grounded: The situation looks bad, and a comeback seems unlikely. But it&#x27;s not your fault. Reply (b), marked strategy-grounded: Zero deaths, you&#x27;re the reason we&#x27;re still in it! Save your immunity for their dive and flip this fight." loading="lazy" decoding="async" sizes="(max-width:960px) 92vw, 46vw"></picture>
+<picture><source srcset="assets/figures/coplaybench-figure1-spaced.webp" type="image/webp"><img src="assets/figures/coplaybench-figure1-spaced.png" width="1250" height="1435" alt="An Honor of Kings teamfight frame, score 6 to 8. A frustrated player says: I haven&#x27;t died once, and we&#x27;re still about to lose. Reply (a), marked not strategy-grounded: The situation looks bad, and a comeback seems unlikely. But it&#x27;s not your fault. Reply (b), marked strategy-grounded: Zero deaths, you&#x27;re the reason we&#x27;re still in it! Save your immunity for their dive and flip this fight." loading="lazy" decoding="async" sizes="(max-width:960px) 92vw, 720px"></picture>
 </a>
 <figcaption><span class="fig-id">Figure 1</span> A frustrated player with no deaths asks for help while trailing 6 to 8. (a) A generic reply offers comfort and concedes the match. (b) The reply CoPlayBench rewards ties encouragement to the player&rsquo;s zero deaths and names the damage-immunity item before the next fight. Both replies illustrate the criterion; neither is a model output.</figcaption>
 </figure>
-</div>
+<div class="props">
+<div><span class="n">01</span><h3>Grounded in what is on screen</h3><p>An unprompted line has to concern the player's next decision, not describe the scene.</p></div>
+<div><span class="n">02</span><h3>Supportive of this player, now</h3><p>Support earns credit only when it is tied to the situation and matches the expected tone.</p></div>
+<div><span class="n">03</span><h3>Delivered while it still matters</h3><p>A window that passes while the model is still generating counts as missed.</p></div>
+<div><span class="n">04</span><h3>Withheld when silence is better</h3><p>Required windows cover 7.4% of Bench video time. The rest of the session is quiet.</p></div>
 </div>
 </section>
 
@@ -628,7 +648,7 @@ section[id]{scroll-margin-top:72px}
 <p class="kicker">CoPlayBench</p>
 <h2 id="bench-h">Every score is tied to one annotated event.</h2>
 <div class="lede">
-<p>Identifying the moments worth attention is subjective, so each video is annotated independently three times and only agreed events survive. Three frontier models mark events; those marked by at least two are retained, 21,494 identified down to 15,689 agreed; three master's-level human annotators then keep only the ones they unanimously judge appropriate.</p>
+<p>Each video is annotated three times over. Three frontier models mark the moments worth attention; events marked by at least two survive, 21,494 down to 15,689; three human annotators then keep only the ones they unanimously accept.</p>
 </div>
 </div>
 <figure class="fig ">
@@ -674,49 +694,6 @@ section[id]{scroll-margin-top:72px}
 </div>
 </div>
 </div>
-<div style="margin-top:clamp(42px,5vw,68px)">
-<h3 style="max-width:40ch">Nine games, nine different timing problems.</h3>
-<p class="lede" style="margin-bottom:22px">Card and board games concentrate required windows into a narrow slice of play; visual games spread them thinly across long quiet stretches. A companion has to handle both.</p>
-<div class="pace" role="img" aria-label="Share of video time inside a required window, by game, with the median window width: Dou Dizhu 27.0% and 4.2 seconds; UNO 17.8% and 5 seconds; Plants vs. Zombies 2 15.3% and 8 seconds; Mahjong 12.0% and 6 seconds; Carrot Fantasy 11.2% and 7 seconds; Honor of Kings 7.0% and 8 seconds; Go 5.7% and 4 seconds; Hearthstone 5.5% and 5 seconds; Stardew Valley 0.8% and 8 seconds.">
-<div class="pace-hd"><span>Game</span><span>Share of video inside a required window</span><span>Cover &middot; window</span></div>
-<div class="pace-row">
-<span class="pace-n">Dou Dizhu</span>
-<span class="pace-t"><span class="pace-f" style="width:100.0%"></span></span>
-<span class="pace-v">27.0% &middot; 4.2s</span>
-</div><div class="pace-row">
-<span class="pace-n">UNO</span>
-<span class="pace-t"><span class="pace-f" style="width:65.93%"></span></span>
-<span class="pace-v">17.8% &middot; 5s</span>
-</div><div class="pace-row">
-<span class="pace-n">Plants vs. Zombies 2</span>
-<span class="pace-t"><span class="pace-f" style="width:56.67%"></span></span>
-<span class="pace-v">15.3% &middot; 8s</span>
-</div><div class="pace-row">
-<span class="pace-n">Mahjong</span>
-<span class="pace-t"><span class="pace-f" style="width:44.44%"></span></span>
-<span class="pace-v">12.0% &middot; 6s</span>
-</div><div class="pace-row">
-<span class="pace-n">Carrot Fantasy</span>
-<span class="pace-t"><span class="pace-f" style="width:41.48%"></span></span>
-<span class="pace-v">11.2% &middot; 7s</span>
-</div><div class="pace-row">
-<span class="pace-n">Honor of Kings</span>
-<span class="pace-t"><span class="pace-f" style="width:25.93%"></span></span>
-<span class="pace-v">7.0% &middot; 8s</span>
-</div><div class="pace-row">
-<span class="pace-n">Go</span>
-<span class="pace-t"><span class="pace-f" style="width:21.11%"></span></span>
-<span class="pace-v">5.7% &middot; 4s</span>
-</div><div class="pace-row">
-<span class="pace-n">Hearthstone</span>
-<span class="pace-t"><span class="pace-f" style="width:20.37%"></span></span>
-<span class="pace-v">5.5% &middot; 5s</span>
-</div><div class="pace-row">
-<span class="pace-n">Stardew Valley</span>
-<span class="pace-t"><span class="pace-f" style="width:2.96%"></span></span>
-<span class="pace-v">0.8% &middot; 8s</span>
-</div></div>
-</div>
 <div class="table-module" id="t-stats">
 <p class="table-insight">Nine games set nine different timing problems: Dou&nbsp;Dizhu needs a reply for 27.0% of its video, Stardew Valley for 0.8%.</p>
 <table data-tex-label="tab:stats">
@@ -743,6 +720,53 @@ section[id]{scroll-margin-top:72px}
 </section>
 </div>
 
+<section class="block" id="scoring" aria-labelledby="sco-h">
+<div class="block-head">
+<p class="kicker kicker-amber">How it is scored</p>
+<h2 id="sco-h">Raw recall rewards talking, so timing is scored against a random speaker.</h2>
+<div class="lede">
+<p>Two metrics carry the claims. <b>StratEmo</b> credits a reply only when its advice is sound <i>and</i> its support fits the situation. <b>TimingLift</b> is recall minus a random speaker placing the same number of lines over the same stream &mdash; so talking more cannot buy it.</p>
+</div>
+</div>
+<div class="panel">
+<svg class="sc" viewBox="0 0 760 330" role="img" aria-label="Recall against lines per minute for the eight frontier models and CoPlayer. DeepSeek-V4.1 speaks 8.8 lines a minute, Recall 72.1 against a random speaker at 60.8, so TimingLift is plus 11.3; Kimi-K3 speaks 3.4 lines a minute, Recall 40.6 against a random speaker at 25.9, so TimingLift is plus 14.7; Qwen3.8-Max speaks 5.3 lines a minute, Recall 57 against a random speaker at 40.8, so TimingLift is plus 16.2; HY4 speaks 4.9 lines a minute, Recall 55.1 against a random speaker at 38.8, so TimingLift is plus 16.3; Doubao-2.1 speaks 7.7 lines a minute, Recall 73.9 against a random speaker at 55.4, so TimingLift is plus 18.6; Claude-5.5 speaks 5.7 lines a minute, Recall 66.3 against a random speaker at 45.4, so TimingLift is plus 20.8; Gemini-3.8 speaks 1.5 lines a minute, Recall 40.5 against a random speaker at 17.8, so TimingLift is plus 22.7; GPT-5.6 speaks 5.4 lines a minute, Recall 73.9 against a random speaker at 45.9, so TimingLift is plus 28; CoPlayer speaks 1.9 lines a minute, Recall 67.4 against a random speaker at 23.7, so TimingLift is plus 43.7.">
+<line class="gr" x1="46" y1="288.0" x2="746" y2="288.0"></line><text x="39" y="291.5" text-anchor="end">0</text><line class="gr" x1="46" y1="233.2" x2="746" y2="233.2"></line><text x="39" y="236.7" text-anchor="end">20</text><line class="gr" x1="46" y1="178.4" x2="746" y2="178.4"></line><text x="39" y="181.9" text-anchor="end">40</text><line class="gr" x1="46" y1="123.6" x2="746" y2="123.6"></line><text x="39" y="127.1" text-anchor="end">60</text><line class="gr" x1="46" y1="68.8" x2="746" y2="68.8"></line><text x="39" y="72.3" text-anchor="end">80</text><line class="gr" x1="46" y1="14.0" x2="746" y2="14.0"></line><text x="39" y="17.5" text-anchor="end">100</text><text x="46.0" y="303" text-anchor="middle">0</text><text x="188.0" y="303" text-anchor="middle">2</text><text x="330.1" y="303" text-anchor="middle">4</text><text x="472.1" y="303" text-anchor="middle">6</text><text x="614.2" y="303" text-anchor="middle">8</text><line class="ax" x1="46" y1="288.0" x2="746" y2="288.0"></line><line class="ax" x1="46" y1="14" x2="46" y2="288.0"></line><line class="lift" x1="671.0" y1="121.4" x2="671.0" y2="90.4"></line><circle class="pt-r" cx="671.0" cy="121.4" r="4.5"></circle><circle class="pt" cx="671.0" cy="90.4" r="4.5"></circle><text class="lbl" x="679.0" y="83.4">DeepSeek-V4.1 +11.3</text><line class="lift" x1="287.5" y1="217.0" x2="287.5" y2="176.8"></line><circle class="pt-r" cx="287.5" cy="217.0" r="4.5"></circle><circle class="pt" cx="287.5" cy="176.8" r="4.5"></circle><text class="lbl" x="295.5" y="169.8">Kimi-K3 +14.7</text><line class="lift" x1="422.4" y1="176.2" x2="422.4" y2="131.8"></line><circle class="pt-r" cx="422.4" cy="176.2" r="4.5"></circle><circle class="pt" cx="422.4" cy="131.8" r="4.5"></circle><text class="lbl" x="430.4" y="124.8">Qwen3.8-Max +16.2</text><line class="lift" x1="394.0" y1="181.7" x2="394.0" y2="137.0"></line><circle class="pt-r" cx="394.0" cy="181.7" r="4.5"></circle><circle class="pt" cx="394.0" cy="137.0" r="4.5"></circle><text class="lbl" x="402.0" y="130.0">HY4 +16.3</text><line class="lift" x1="592.9" y1="136.2" x2="592.9" y2="85.5"></line><circle class="pt-r" cx="592.9" cy="136.2" r="4.5"></circle><circle class="pt" cx="592.9" cy="85.5" r="4.5"></circle><text class="lbl" x="600.9" y="78.5">Doubao-2.1 +18.6</text><line class="lift" x1="450.8" y1="163.6" x2="450.8" y2="106.3"></line><circle class="pt-r" cx="450.8" cy="163.6" r="4.5"></circle><circle class="pt" cx="450.8" cy="106.3" r="4.5"></circle><text class="lbl" x="458.8" y="99.3">Claude-5.5 +20.8</text><line class="lift" x1="152.5" y1="239.2" x2="152.5" y2="177.0"></line><circle class="pt-r" cx="152.5" cy="239.2" r="4.5"></circle><circle class="pt" cx="152.5" cy="177.0" r="4.5"></circle><text class="lbl" x="160.5" y="170.0">Gemini-3.8 +22.7</text><line class="lift" x1="429.5" y1="162.2" x2="429.5" y2="85.5"></line><circle class="pt-r" cx="429.5" cy="162.2" r="4.5"></circle><circle class="pt" cx="429.5" cy="85.5" r="4.5"></circle><text class="lbl" x="437.5" y="78.5">GPT-5.6 +28</text><line class="lift" x1="180.9" y1="223.1" x2="180.9" y2="103.3"></line><circle class="pt-r" cx="180.9" cy="223.1" r="4.5"></circle><circle class="pt-ours" cx="180.9" cy="103.3" r="5.5"></circle><text class="lbl lbl-o" x="188.9" y="96.3">CoPlayer +43.7</text>
+<text x="396" y="326" text-anchor="middle">lines per minute</text>
+<text x="10" y="18" transform="rotate(-90 10 18)" text-anchor="end">Recall (%)</text>
+</svg>
+<div class="lb-foot" style="margin-top:4px">
+<span class="lb-sk"><svg width="13" height="13" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" fill="#3D434B"></circle></svg>Recall</span>
+<span class="lb-sk"><svg width="13" height="13" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" fill="none" stroke="#BFC4CA" stroke-width="1.5"></circle></svg>random speaker, same number of lines</span>
+<span class="lb-sk"><svg width="13" height="13" aria-hidden="true"><line x1="6.5" y1="1" x2="6.5" y2="12" stroke="#B98E3B" stroke-width="3" stroke-linecap="round"></line></svg>TimingLift</span>
+</div>
+</div>
+<div class="table-module narrow" id="t-acronyms">
+<p class="table-insight">Every metric on this page, defined once. Two carry the claims: StratEmo and TimingLift.</p>
+<table data-tex-label="tab:acronyms">
+<caption><b>Table 7.</b> Metric abbreviations used in Table 2 and Table 3, with definitions for every reported metric.</caption>
+<thead>
+<tr><th scope="col" class="l">Acronym</th><th scope="col" class="l">Meaning</th><th scope="col" class="l">Acronym</th><th scope="col" class="l">Meaning</th></tr>
+</thead>
+<tbody>
+<tr><th scope="row" data-label="Acronym">GroundF1</th><td class="l" data-label="Meaning">must-mention F1, wrong claims as false positives</td><th scope="row" data-label="Acronym">StratAcc</th><td class="l" data-label="Meaning">advice questions with sound strategy</td></tr>
+<tr><th scope="row" data-label="Acronym">FactAcc</th><td class="l" data-label="Meaning">verifiable facts correct</td><th scope="row" data-label="Acronym">EmoAcc</th><td class="l" data-label="Meaning">player emotion recognized</td></tr>
+<tr><th scope="row" data-label="Acronym">SupQual</th><td class="l" data-label="Meaning">support score 0–4, rescaled</td><th scope="row" data-label="Acronym">StratEmo</th><td class="l" data-label="Meaning">sound strategy with support ≥3</td></tr>
+<tr><th scope="row" data-label="Acronym">TTFT</th><td class="l" data-label="Meaning">time to first visible token</td><th scope="row" data-label="Acronym">TTUA</th><td class="l" data-label="Meaning">time until useful advice is complete</td></tr>
+<tr><th scope="row" data-label="Acronym">OnTime</th><td class="l" data-label="Meaning">advice complete by its deadline (TTUA)</td><th scope="row" data-label="Acronym">OnTime-F</th><td class="l" data-label="Meaning">OnTime under a fixed deadline</td></tr>
+<tr><th scope="row" data-label="Acronym">Violation</th><td class="l" data-label="Meaning">reply violates a must-not item</td><th scope="row" data-label="Acronym">LenOK</th><td class="l" data-label="Meaning">reply within the word limit</td></tr>
+<tr><th scope="row" data-label="Acronym">Recall</th><td class="l" data-label="Meaning">required windows hit at step time</td><th scope="row" data-label="Acronym">Recall-S</th><td class="l" data-label="Meaning">hit by first-token arrival</td></tr>
+<tr><th scope="row" data-label="Acronym">RandBase</th><td class="l" data-label="Meaning">random speaker, same utterance count</td><th scope="row" data-label="Acronym">TimingLift</th><td class="l" data-label="Meaning">Recall minus RandBase</td></tr>
+<tr><th scope="row" data-label="Acronym">SeenRate</th><td class="l" data-label="Meaning">required windows with an observed step</td><th scope="row" data-label="Acronym">Recall-O</th><td class="l" data-label="Meaning">recall on observed windows</td></tr>
+<tr><th scope="row" data-label="Acronym">HitStrat</th><td class="l" data-label="Meaning">sound strategy in first in-window line</td><th scope="row" data-label="Acronym">HitSup</th><td class="l" data-label="Meaning">support score of that line</td></tr>
+<tr><th scope="row" data-label="Acronym">HitStratEmo</th><td class="l" data-label="Meaning">sound strategy and support ≥3</td><th scope="row" data-label="Acronym">SpeakRate</th><td class="l" data-label="Meaning">lines per minute</td></tr>
+<tr><th scope="row" data-label="Acronym">NoiseRate</th><td class="l" data-label="Meaning">outside-window chat, wrong or noise per minute</td><th scope="row" data-label="Acronym">QuotaOver</th><td class="l" data-label="Meaning">quiet-time periods over quota</td></tr>
+</tbody>
+</table>
+</div>
+<p class="small-note">Each model's filled dot is its Recall; the open dot below it is that random speaker; the amber bar between them is TimingLift. GPT-5.6-Sol and Doubao-Seed-2.1-Pro reach the same recall, but Doubao speaks over 40% more often. TimingLift is not confound-free: fewer observed frames mean fewer chances to speak.</p>
+</section>
+
+<div class="block-tint">
 <section class="block" id="method" aria-labelledby="method-h">
 <div class="block-head">
 <p class="kicker">CoPlayer</p>
@@ -757,12 +781,11 @@ section[id]{scroll-margin-top:72px}
 </a>
 <figcaption><span class="fig-id">Figure 5</span> (a) At play, CoPlayer sees only the frames the player has seen and either answers a question or decides every &Delta;t whether to speak. (b) Shared supervised fine-tuning, then two separately trained reinforcement-learning policies with training-only reward judges that never enter the deployed forward pass. The game scene and companion line are generated illustrations, not recorded gameplay.</figcaption>
 </figure>
-<ol class="steps" style="margin-top:clamp(34px,4vw,52px)">
-<li><b>Shared supervision.</b> 1,255 Train videos give 12,914 reactive question&ndash;answer examples and 27,843 step-level proactive examples. The result is one model that can both answer and decide.</li>
-<li><b>Reactive policy.</b> GRPO on the 302 Train videos supervision did not use. Content is weighted most (0.55), emotion next (0.35), format least (0.15); support is worth almost twice emotion perception, because comfort that refers to what just happened is the half of StratEmo models miss most often.</li>
-<li><b>Proactive policy.</b> The reward scores the decision before the line. Silence inside a required window costs &minus;0.80, below chat and noise outside one, because a companion that misses the teamfight it was watching for has failed at the thing it is there for.</li>
-<li><b>One GRPO detail that matters.</b> When all eight samples in a must-speak group stay silent, advantages normalise to zero and the miss penalty vanishes. The false decision tokens, and no others, are given an advantage of &minus;0.3 so it does not.</li>
-</ol>
+<ul class="notes" style="margin-top:clamp(32px,3.8vw,48px)">
+<li><b>Shared supervision</b> on 1,255 Train videos: 12,914 reactive question&ndash;answer examples and 27,843 step-level proactive examples. One model that can both answer and decide.</li>
+<li><b>Two GRPO policies</b> on the 302 videos supervision did not use. The reactive reward weights content most and support almost twice emotion perception; the proactive reward scores the decision before the line.</li>
+<li><b>One GRPO detail that matters.</b> When all eight samples in a must-speak group stay silent, advantages normalise to zero and the miss penalty vanishes. The false decision tokens, and no others, get an advantage of &minus;0.3 so it does not.</li>
+</ul>
 <div class="table-side">
 <div class="table-module narrow" id="t-reward">
 <p class="table-insight">The reward states the priority out loud: silence inside a required window costs more than chatting outside one.</p>
@@ -799,16 +822,18 @@ section[id]{scroll-margin-top:72px}
 </div>
 </div>
 </section>
+</div>
 
-<div class="block-tint">
 <section class="block" id="results" aria-labelledby="results-h">
 <div class="block-head">
 <p class="kicker">Results</p>
 <h2 id="results-h">Frontier models read the game, then fail at the judgment a companion is for.</h2>
 <div class="lede">
-<p>Switch the metric. The pattern holds across both tracks: the tested models describe what is on screen competently, supervision closes much of the remaining gap and reinforcement learning closes a little more. These are observed checkpoint differences, not a controlled attribution &mdash; and on restraint, CoPlayer is not first.</p>
+<p>Two tracks, scored separately: answering when asked, and deciding to speak when nothing was asked. Supervision closes much of the gap and reinforcement learning closes a little more &mdash; and on restraint, CoPlayer is not first. These are observed checkpoint differences, not a controlled attribution.</p>
 </div>
 </div>
+<h3 class="track">Track 1 &mdash; asked a question, it answers well enough to act on.</h3>
+<p class="lede" style="margin-bottom:clamp(26px,3vw,38px)">Switch the metric to see the ordering change. Every model is given the same frames and the same player question.</p>
 <div class="panel lb" data-rows="[{&quot;model&quot;:&quot;HY4&quot;,&quot;short&quot;:&quot;HY4&quot;,&quot;icon&quot;:&quot;icon_hy4.png&quot;,&quot;group&quot;:&quot;frontier&quot;,&quot;StratEmo&quot;:5.7,&quot;GroundF1&quot;:34.6,&quot;TimingLift&quot;:16.3,&quot;HitStratEmo&quot;:1.9,&quot;NoiseRate&quot;:2.1},{&quot;model&quot;:&quot;DeepSeek-V4.1-Flash&quot;,&quot;short&quot;:&quot;DeepSeek-V4.1&quot;,&quot;icon&quot;:&quot;icon_deepseek.png&quot;,&quot;group&quot;:&quot;frontier&quot;,&quot;StratEmo&quot;:6.4,&quot;GroundF1&quot;:31.4,&quot;TimingLift&quot;:11.3,&quot;HitStratEmo&quot;:2.4,&quot;NoiseRate&quot;:4.98},{&quot;model&quot;:&quot;Doubao-Seed-2.1-Pro&quot;,&quot;short&quot;:&quot;Doubao-2.1&quot;,&quot;icon&quot;:&quot;icon_doubao.png&quot;,&quot;group&quot;:&quot;frontier&quot;,&quot;StratEmo&quot;:6.8,&quot;GroundF1&quot;:34.3,&quot;TimingLift&quot;:18.6,&quot;HitStratEmo&quot;:2.3,&quot;NoiseRate&quot;:4.72},{&quot;model&quot;:&quot;GPT-5.6-Sol&quot;,&quot;short&quot;:&quot;GPT-5.6&quot;,&quot;icon&quot;:&quot;icon_gpt.png&quot;,&quot;group&quot;:&quot;frontier&quot;,&quot;StratEmo&quot;:7.9,&quot;GroundF1&quot;:42.1,&quot;TimingLift&quot;:28.0,&quot;HitStratEmo&quot;:4.0,&quot;NoiseRate&quot;:2.25},{&quot;model&quot;:&quot;Kimi-K3&quot;,&quot;short&quot;:&quot;Kimi-K3&quot;,&quot;icon&quot;:&quot;icon_kimi.png&quot;,&quot;group&quot;:&quot;frontier&quot;,&quot;StratEmo&quot;:8.6,&quot;GroundF1&quot;:33.4,&quot;TimingLift&quot;:14.7,&quot;HitStratEmo&quot;:6.6,&quot;NoiseRate&quot;:1.76},{&quot;model&quot;:&quot;Claude-Sonnet-5.5&quot;,&quot;short&quot;:&quot;Claude-5.5&quot;,&quot;icon&quot;:&quot;icon_claude.png&quot;,&quot;group&quot;:&quot;frontier&quot;,&quot;StratEmo&quot;:8.8,&quot;GroundF1&quot;:38.6,&quot;TimingLift&quot;:20.8,&quot;HitStratEmo&quot;:2.8,&quot;NoiseRate&quot;:2.79},{&quot;model&quot;:&quot;Qwen3.8-Max&quot;,&quot;short&quot;:&quot;Qwen3.8-Max&quot;,&quot;icon&quot;:&quot;icon_qwen.png&quot;,&quot;group&quot;:&quot;frontier&quot;,&quot;StratEmo&quot;:12.3,&quot;GroundF1&quot;:34.3,&quot;TimingLift&quot;:16.2,&quot;HitStratEmo&quot;:3.1,&quot;NoiseRate&quot;:3.26},{&quot;model&quot;:&quot;Gemini-3.8-Flash&quot;,&quot;short&quot;:&quot;Gemini-3.8&quot;,&quot;icon&quot;:&quot;icon_gemini.png&quot;,&quot;group&quot;:&quot;frontier&quot;,&quot;StratEmo&quot;:14.5,&quot;GroundF1&quot;:39.7,&quot;TimingLift&quot;:22.7,&quot;HitStratEmo&quot;:8.0,&quot;NoiseRate&quot;:0.64},{&quot;model&quot;:&quot;CoPlayer&quot;,&quot;short&quot;:&quot;CoPlayer&quot;,&quot;icon&quot;:&quot;icon_coplayer.png&quot;,&quot;group&quot;:&quot;local&quot;,&quot;StratEmo&quot;:34.3,&quot;GroundF1&quot;:55.1,&quot;TimingLift&quot;:43.7,&quot;HitStratEmo&quot;:31.2,&quot;NoiseRate&quot;:0.97,&quot;stack&quot;:{&quot;GroundF1&quot;:{&quot;base&quot;:26.7,&quot;sft&quot;:48.8,&quot;rl&quot;:55.1},&quot;TimingLift&quot;:{&quot;base&quot;:25.6,&quot;sft&quot;:39.9,&quot;rl&quot;:43.7}}}]" data-metrics="[{&quot;key&quot;:&quot;StratEmo&quot;,&quot;track&quot;:&quot;reactive&quot;,&quot;label&quot;:&quot;StratEmo&quot;,&quot;unit&quot;:&quot;%&quot;,&quot;better&quot;:&quot;higher&quot;,&quot;blurb&quot;:&quot;Sound advice and support of at least 3 of 4, in the same reply.&quot;,&quot;table&quot;:&quot;tab:reactive&quot;},{&quot;key&quot;:&quot;GroundF1&quot;,&quot;track&quot;:&quot;reactive&quot;,&quot;label&quot;:&quot;GroundF1&quot;,&quot;unit&quot;:&quot;%&quot;,&quot;better&quot;:&quot;higher&quot;,&quot;blurb&quot;:&quot;Must-mention F1, with wrong claims counted as false positives.&quot;,&quot;table&quot;:&quot;tab:reactive&quot;},{&quot;key&quot;:&quot;TimingLift&quot;,&quot;track&quot;:&quot;proactive&quot;,&quot;label&quot;:&quot;TimingLift&quot;,&quot;unit&quot;:&quot;pp&quot;,&quot;better&quot;:&quot;higher&quot;,&quot;blurb&quot;:&quot;Recall minus a random speaker with the same number of lines.&quot;,&quot;table&quot;:&quot;tab:proactive&quot;},{&quot;key&quot;:&quot;HitStratEmo&quot;,&quot;track&quot;:&quot;proactive&quot;,&quot;label&quot;:&quot;HitStratEmo&quot;,&quot;unit&quot;:&quot;%&quot;,&quot;better&quot;:&quot;higher&quot;,&quot;blurb&quot;:&quot;Sound advice with fitting support in the first in-window line.&quot;,&quot;table&quot;:&quot;tab:proactive&quot;},{&quot;key&quot;:&quot;NoiseRate&quot;,&quot;track&quot;:&quot;proactive&quot;,&quot;label&quot;:&quot;NoiseRate&quot;,&quot;unit&quot;:&quot;/min&quot;,&quot;better&quot;:&quot;lower&quot;,&quot;blurb&quot;:&quot;Off-window chat, wrong or noise lines per minute.&quot;,&quot;table&quot;:&quot;tab:proactive&quot;}]" data-initial="StratEmo">
 <div class="lb-sw" role="group" aria-label="Choose the metric to plot"><button type="button" data-k="StratEmo" aria-pressed="true">StratEmo</button><button type="button" data-k="GroundF1" aria-pressed="false">GroundF1</button><button type="button" data-k="TimingLift" aria-pressed="false">TimingLift</button><button type="button" data-k="HitStratEmo" aria-pressed="false">HitStratEmo</button><button type="button" data-k="NoiseRate" aria-pressed="false">NoiseRate &darr;</button></div>
 <p class="lb-blurb">Sound advice and support of at least 3 of 4, in the same reply.</p>
@@ -854,13 +879,7 @@ section[id]{scroll-margin-top:72px}
 <span class="lb-dir">higher is better</span>
 </div>
 </div>
-<p class="small-note">The best frontier model is not the same model in every column: Gemini-3.8-Flash on StratEmo, GPT-5.6-Sol on GroundF1 and TimingLift. With each provider's reasoning switch off, hidden reasoning still appears on 52.5% of reactive calls to Gemini-3.8-Flash &mdash; the model that sets the 14.5 comparator &mdash; and on 4.2% for Claude-Sonnet-5.5 and 0.2% for Kimi-K3.</p>
-<figure class="fig ">
-<a class="fig-open" href="assets/figures/figure6-groundf1-timinglift-v7.png" aria-label="Open Figure 6 at full size">
-<picture><source srcset="assets/figures/figure6-groundf1-timinglift-v7.webp" type="image/webp"><img src="assets/figures/figure6-groundf1-timinglift-v7.png" width="2200" height="762" alt="Two bar charts. (a) GroundF1 in percent: the CoPlayer stack reads 26.7 for the base model, 48.8 after supervised fine-tuning and 55.1 after reinforcement learning; frontier models follow at GPT-5.6 42.1, Gemini-3.8 39.7, Claude-5.5 38.6, HY4 34.6, Qwen-3.8 34.3, Doubao-2.1 34.3, Kimi-K3 33.4 and DeepSeek-V4.1 31.4. (b) TimingLift in percentage points: CoPlayer 25.6, 39.9 and 43.7; then GPT-5.6 28.0, Gemini-3.8 22.7, Claude-5.5 20.8, Doubao-2.1 18.6, HY4 16.3, Qwen-3.8 16.2, Kimi-K3 14.7 and DeepSeek-V4.1 11.3." loading="lazy" decoding="async" sizes="(max-width:1200px) 92vw, 1120px"></picture>
-</a>
-<figcaption><span class="fig-id">Figure 6</span> The paper&rsquo;s own leaderboard: (a) reactive GroundF1 and (b) proactive TimingLift, with the CoPlayer stack drawn as stage increments and cumulative values printed.</figcaption>
-</figure>
+<p class="small-note">The best frontier model differs by column: Gemini-3.8-Flash on StratEmo, GPT-5.6-Sol on GroundF1 and TimingLift. With each provider's reasoning switch off, hidden reasoning still appears on 52.5% of reactive calls to Gemini-3.8-Flash &mdash; the model that sets the 14.5 comparator.</p>
 <div class="table-module wide" id="t-reactive">
 <p class="table-insight">Frontier models get the facts right and the judgment wrong: at most 14.5% of advice questions pair sound strategy with fitting support, against CoPlayer&rsquo;s 34.3% and the reference replies&rsquo; 99.1%.</p>
 <table data-tex-label="tab:reactive">
@@ -890,70 +909,10 @@ section[id]{scroll-margin-top:72px}
 </tbody>
 </table>
 </div>
-<p class="table-legend"><span><b>55.1</b> best of the eleven models</span><span><u>48.8</u> second best</span><span>tinted row with a blue rule: the local CoPlayer stack</span><span>grey with †: historical timing, not ranked</span></p>
-<div style="margin-top:clamp(42px,5vw,68px)">
-<h3 style="max-width:40ch">Raw recall rewards talking, so timing is scored against a random speaker.</h3>
-<p class="lede" style="margin-bottom:24px">Each model's filled dot is its Recall; the open dot below it is a random speaker placing the same number of lines uniformly over the same stream. The amber bar between them is TimingLift &mdash; what separates targeted intervention from talking a lot.</p>
-<div class="columns-2">
-<div><div class="panel">
-<svg class="sc" viewBox="0 0 760 330" role="img" aria-label="Recall against lines per minute for the eight frontier models and CoPlayer. DeepSeek-V4.1 speaks 8.8 lines a minute, Recall 72.1 against a random speaker at 60.8, so TimingLift is plus 11.3; Kimi-K3 speaks 3.4 lines a minute, Recall 40.6 against a random speaker at 25.9, so TimingLift is plus 14.7; Qwen3.8-Max speaks 5.3 lines a minute, Recall 57 against a random speaker at 40.8, so TimingLift is plus 16.2; HY4 speaks 4.9 lines a minute, Recall 55.1 against a random speaker at 38.8, so TimingLift is plus 16.3; Doubao-2.1 speaks 7.7 lines a minute, Recall 73.9 against a random speaker at 55.4, so TimingLift is plus 18.6; Claude-5.5 speaks 5.7 lines a minute, Recall 66.3 against a random speaker at 45.4, so TimingLift is plus 20.8; Gemini-3.8 speaks 1.5 lines a minute, Recall 40.5 against a random speaker at 17.8, so TimingLift is plus 22.7; GPT-5.6 speaks 5.4 lines a minute, Recall 73.9 against a random speaker at 45.9, so TimingLift is plus 28; CoPlayer speaks 1.9 lines a minute, Recall 67.4 against a random speaker at 23.7, so TimingLift is plus 43.7.">
-<line class="gr" x1="46" y1="288.0" x2="746" y2="288.0"></line><text x="39" y="291.5" text-anchor="end">0</text><line class="gr" x1="46" y1="233.2" x2="746" y2="233.2"></line><text x="39" y="236.7" text-anchor="end">20</text><line class="gr" x1="46" y1="178.4" x2="746" y2="178.4"></line><text x="39" y="181.9" text-anchor="end">40</text><line class="gr" x1="46" y1="123.6" x2="746" y2="123.6"></line><text x="39" y="127.1" text-anchor="end">60</text><line class="gr" x1="46" y1="68.8" x2="746" y2="68.8"></line><text x="39" y="72.3" text-anchor="end">80</text><line class="gr" x1="46" y1="14.0" x2="746" y2="14.0"></line><text x="39" y="17.5" text-anchor="end">100</text><text x="46.0" y="303" text-anchor="middle">0</text><text x="188.0" y="303" text-anchor="middle">2</text><text x="330.1" y="303" text-anchor="middle">4</text><text x="472.1" y="303" text-anchor="middle">6</text><text x="614.2" y="303" text-anchor="middle">8</text><line class="ax" x1="46" y1="288.0" x2="746" y2="288.0"></line><line class="ax" x1="46" y1="14" x2="46" y2="288.0"></line><line class="lift" x1="671.0" y1="121.4" x2="671.0" y2="90.4"></line><circle class="pt-r" cx="671.0" cy="121.4" r="4.5"></circle><circle class="pt" cx="671.0" cy="90.4" r="4.5"></circle><text class="lbl" x="679.0" y="83.4">DeepSeek-V4.1 +11.3</text><line class="lift" x1="287.5" y1="217.0" x2="287.5" y2="176.8"></line><circle class="pt-r" cx="287.5" cy="217.0" r="4.5"></circle><circle class="pt" cx="287.5" cy="176.8" r="4.5"></circle><text class="lbl" x="295.5" y="169.8">Kimi-K3 +14.7</text><line class="lift" x1="422.4" y1="176.2" x2="422.4" y2="131.8"></line><circle class="pt-r" cx="422.4" cy="176.2" r="4.5"></circle><circle class="pt" cx="422.4" cy="131.8" r="4.5"></circle><text class="lbl" x="430.4" y="124.8">Qwen3.8-Max +16.2</text><line class="lift" x1="394.0" y1="181.7" x2="394.0" y2="137.0"></line><circle class="pt-r" cx="394.0" cy="181.7" r="4.5"></circle><circle class="pt" cx="394.0" cy="137.0" r="4.5"></circle><text class="lbl" x="402.0" y="130.0">HY4 +16.3</text><line class="lift" x1="592.9" y1="136.2" x2="592.9" y2="85.5"></line><circle class="pt-r" cx="592.9" cy="136.2" r="4.5"></circle><circle class="pt" cx="592.9" cy="85.5" r="4.5"></circle><text class="lbl" x="600.9" y="78.5">Doubao-2.1 +18.6</text><line class="lift" x1="450.8" y1="163.6" x2="450.8" y2="106.3"></line><circle class="pt-r" cx="450.8" cy="163.6" r="4.5"></circle><circle class="pt" cx="450.8" cy="106.3" r="4.5"></circle><text class="lbl" x="458.8" y="99.3">Claude-5.5 +20.8</text><line class="lift" x1="152.5" y1="239.2" x2="152.5" y2="177.0"></line><circle class="pt-r" cx="152.5" cy="239.2" r="4.5"></circle><circle class="pt" cx="152.5" cy="177.0" r="4.5"></circle><text class="lbl" x="160.5" y="170.0">Gemini-3.8 +22.7</text><line class="lift" x1="429.5" y1="162.2" x2="429.5" y2="85.5"></line><circle class="pt-r" cx="429.5" cy="162.2" r="4.5"></circle><circle class="pt" cx="429.5" cy="85.5" r="4.5"></circle><text class="lbl" x="437.5" y="78.5">GPT-5.6 +28</text><line class="lift" x1="180.9" y1="223.1" x2="180.9" y2="103.3"></line><circle class="pt-r" cx="180.9" cy="223.1" r="4.5"></circle><circle class="pt-ours" cx="180.9" cy="103.3" r="5.5"></circle><text class="lbl lbl-o" x="188.9" y="96.3">CoPlayer +43.7</text>
-<text x="396" y="326" text-anchor="middle">lines per minute</text>
-<text x="10" y="18" transform="rotate(-90 10 18)" text-anchor="end">Recall (%)</text>
-</svg>
-<div class="lb-foot" style="margin-top:4px">
-<span class="lb-sk"><svg width="13" height="13" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" fill="#3D434B"></circle></svg>Recall</span>
-<span class="lb-sk"><svg width="13" height="13" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" fill="none" stroke="#BFC4CA" stroke-width="1.5"></circle></svg>random speaker, same number of lines</span>
-<span class="lb-sk"><svg width="13" height="13" aria-hidden="true"><line x1="6.5" y1="1" x2="6.5" y2="12" stroke="#B98E3B" stroke-width="3" stroke-linecap="round"></line></svg>TimingLift</span>
-</div>
-</div></div>
-<div>
-<div class="crit">
-<div class="hd"></div><div class="hd">Support &ge; 3 of 4</div><div class="hd">Support &lt; 3</div>
-<div class="hd">Sound strategy</div><div class="yes"><b>Counts for StratEmo</b><br>advice and support arriving together</div><div class="no">No credit &mdash; a tooltip, not a companion</div>
-<div class="hd">Unsound</div><div class="no">No credit &mdash; warmth over a wrong call</div><div class="no">No credit</div>
-</div>
-<p class="small-note">StratEmo counts only the top-left cell, over the 7,037 advice questions. The reference replies reach 99.1 on it, so the criterion is met when the advice is actually right.</p>
-<p class="small-note">TimingLift is not confound-free: fewer observed frames mean fewer chances to speak, so SeenRate and Recall-O describe observed-window recall and do not separate perception from timing.</p>
-</div>
-</div>
-</div>
-<div style="margin-top:clamp(42px,5vw,68px)">
-<h3 style="max-width:44ch">Unprompted, CoPlayer speaks inside required windows &mdash; and talks more to do it.</h3>
-<p class="lede" style="margin-bottom:24px">From the supervised checkpoint to the final policy, every column below moves in the direction the reward asked for, including the two that get worse. A page that showed only the first three numbers would be lying by omission.</p>
-<div class="ba"><div class="ba-c better">
-<p class="ba-m">TimingLift</p>
-<p class="ba-v"><span class="ba-from">+39.9</span><span class="ba-ar">&rarr;</span><span class="ba-to">+43.7pp</span></p>
-<p class="ba-d">lines land in required windows</p>
-<p class="ba-tag">better</p>
-</div><div class="ba-c better">
-<p class="ba-m">HitStratEmo</p>
-<p class="ba-v"><span class="ba-from">24</span><span class="ba-ar">&rarr;</span><span class="ba-to">31.2%</span></p>
-<p class="ba-d">the first in-window line is sound and supported</p>
-<p class="ba-tag">better</p>
-</div><div class="ba-c better">
-<p class="ba-m">Recall</p>
-<p class="ba-v"><span class="ba-from">55</span><span class="ba-ar">&rarr;</span><span class="ba-to">67.4%</span></p>
-<p class="ba-d">required windows hit at step time</p>
-<p class="ba-tag">better</p>
-</div><div class="ba-c worse">
-<p class="ba-m">NoiseRate</p>
-<p class="ba-v"><span class="ba-from">0.45</span><span class="ba-ar">&rarr;</span><span class="ba-to">0.97 /min</span></p>
-<p class="ba-d">off-window chat, wrong or noise</p>
-<p class="ba-tag">worse</p>
-</div><div class="ba-c worse">
-<p class="ba-m">QuotaOver</p>
-<p class="ba-v"><span class="ba-from">16.6</span><span class="ba-ar">&rarr;</span><span class="ba-to">33.1%</span></p>
-<p class="ba-d">quiet-time periods over quota</p>
-<p class="ba-tag">worse</p>
-</div><div class="ba-c">
-<p class="ba-m">SpeakRate</p>
-<p class="ba-v"><span class="ba-from">1.1</span><span class="ba-ar">&rarr;</span><span class="ba-to">1.9 /min</span></p>
-<p class="ba-d">lines per minute</p>
-<p class="ba-tag">more talking</p>
-</div></div>
-</div>
-<div style="margin-top:clamp(42px,5vw,68px)">
+<p class="table-legend"><span><b>55.1</b> best of the eleven models</span><span><u>48.8</u> second best</span><span>tinted row with a blue rule: the local CoPlayer stack</span><span>grey with &dagger;: historical timing, not ranked</span></p>
+
+<h3 class="track">Track 2 &mdash; nobody asked, so it has to decide whether to speak.</h3>
+<p class="lede" style="margin-bottom:clamp(26px,3vw,38px)">No question arrives. The model watches the stream and either commits a line inside the required window or stays quiet. One recorded event first, then the leaderboard it comes from.</p>
 <div class="dt" id="tl-ddz" data-tl="{&quot;t0&quot;:34.4,&quot;t1&quot;:64.6,&quot;decision&quot;:50.0,&quot;step&quot;:2.0}" data-autoplay>
 <div class="dt-hd">
 <span class="dt-key"><span class="dt-chip-win" aria-hidden="true"></span>required window 48.4&ndash;50.61s</span>
@@ -996,8 +955,7 @@ section[id]{scroll-margin-top:72px}
 <span class="rep-v v-no">not sound &middot; support 0/4</span></p>
 <blockquote class="rep-q">Clock&#x27;s at 1 — play something now or you&#x27;ll get auto-passed!</blockquote>
 <p class="rep-n">Only warns about the timer; no play is named.<span class="rep-x">must-not violation: Suggest passing</span></p>
-</div></div><p class="dt-note">One recorded event: Dou Dizhu at decision step 50&nbsp;s, where the landlord is down to three cards after a pair of jacks and the required window is 2.2&nbsp;s wide. Drag the reading head. The marks are this video&rsquo;s recorded decision steps, taken from the authors&rsquo; own figure source &mdash; not a delivery-time animation and not an average. Every model speaks inside the window; the judge rates only CoPlayer&rsquo;s line sound, and both baselines are recorded as must-not violations for suggesting a pass.</p></div>
-</div>
+</div></div><p class="dt-note">Dou Dizhu at decision step 50&nbsp;s: the landlord is down to three cards after a pair of jacks, and the required window is 2.2&nbsp;s wide. Drag the reading head. The marks are this video&rsquo;s recorded decision steps from the authors&rsquo; own figure source &mdash; not a delivery-time animation and not an average. Every model speaks inside the window; the judge rates only CoPlayer&rsquo;s line sound, and both baselines are recorded as must-not violations for suggesting a pass.</p></div>
 <div class="table-module wide" id="t-proactive">
 <p class="table-insight">Read TimingLift, not Recall. The untrained base model leads raw Recall by talking 8.2 times a minute; CoPlayer reaches +43.7 at 1.9 lines a minute, and pays for it in NoiseRate.</p>
 <table data-tex-label="tab:proactive">
@@ -1024,20 +982,44 @@ section[id]{scroll-margin-top:72px}
 </tbody>
 </table>
 </div>
-<div style="margin-top:clamp(42px,5vw,68px)">
-<h3 style="max-width:44ch">Five metrics at once, by rank.</h3>
-<p class="lede" style="margin-bottom:22px">Darker is a better rank within each column. CoPlayer leads TimingLift and StratEmo; the base model leads raw Recall by speaking far more often; supervision is the quietest. Local OnTime is not shown because local latency is not comparable with the historical API timings.</p>
-<div class="rm">
-<div class="rm-full"><table class="rmt" aria-label="Five headline metrics by rank, all eleven models"><thead><tr><th scope="col" style="text-align:left">Model</th><th scope="col"><span class="g">When to speak</span>Recall &uarr;</th><th scope="col"><span class="g">When to speak</span>TimingLift &uarr;</th><th scope="col"><span class="g">What to say</span>StratEmo &uarr;</th><th scope="col"><span class="g">Quiet and fast</span>NoiseRate &darr;</th><th scope="col"><span class="g">Quiet and fast</span>OnTime &uarr;</th></tr></thead><tbody><tr><th scope="row">Gemini-3.8</th><td><span class="rm-cell" style="--k:0.000">40.5<span class="vh"> rank 11 of 11</span></span></td><td><span class="rm-cell" style="--k:0.600">+22.7<span class="vh"> rank 5 of 11</span></span></td><td><span class="rm-cell" style="--k:0.800">14.5<span class="vh"> rank 3 of 11</span></span></td><td><span class="rm-cell" style="--k:0.900">0.64<span class="vh"> rank 2 of 11</span></span></td><td><span class="rm-cell" style="--k:0.857">19.6<span class="vh"> rank 2 of 8</span></span></td></tr><tr><th scope="row">GPT-5.6</th><td><span class="rm-cell" style="--k:0.900">73.9<span class="vh"> rank 2 of 11</span></span></td><td><span class="rm-cell" style="--k:0.800">+28.0<span class="vh"> rank 3 of 11</span></span></td><td><span class="rm-cell" style="--k:0.400">7.9<span class="vh"> rank 7 of 11</span></span></td><td><span class="rm-cell" style="--k:0.500">2.25<span class="vh"> rank 6 of 11</span></span></td><td><span class="rm-cell" style="--k:0.571">17.0<span class="vh"> rank 4 of 8</span></span></td></tr><tr><th scope="row">Claude-Sonnet</th><td><span class="rm-cell" style="--k:0.500">66.3<span class="vh"> rank 6 of 11</span></span></td><td><span class="rm-cell" style="--k:0.500">+20.8<span class="vh"> rank 6 of 11</span></span></td><td><span class="rm-cell" style="--k:0.600">8.8<span class="vh"> rank 5 of 11</span></span></td><td><span class="rm-cell" style="--k:0.400">2.79<span class="vh"> rank 7 of 11</span></span></td><td><span class="rm-cell" style="--k:0.714">18.1<span class="vh"> rank 3 of 8</span></span></td></tr><tr><th scope="row">Doubao-2.1</th><td><span class="rm-cell" style="--k:0.900">73.9<span class="vh"> rank 2 of 11</span></span></td><td><span class="rm-cell" style="--k:0.400">+18.6<span class="vh"> rank 7 of 11</span></span></td><td><span class="rm-cell" style="--k:0.300">6.8<span class="vh"> rank 8 of 11</span></span></td><td><span class="rm-cell" style="--k:0.200">4.72<span class="vh"> rank 9 of 11</span></span></td><td><span class="rm-cell" style="--k:0.429">15.8<span class="vh"> rank 5 of 8</span></span></td></tr><tr><th scope="row">Qwen3.8-Max</th><td><span class="rm-cell" style="--k:0.400">57.0<span class="vh"> rank 7 of 11</span></span></td><td><span class="rm-cell" style="--k:0.200">+16.2<span class="vh"> rank 9 of 11</span></span></td><td><span class="rm-cell" style="--k:0.700">12.3<span class="vh"> rank 4 of 11</span></span></td><td><span class="rm-cell" style="--k:0.300">3.26<span class="vh"> rank 8 of 11</span></span></td><td><span class="rm-cell" style="--k:0.143">10.6<span class="vh"> rank 7 of 8</span></span></td></tr><tr><th scope="row">Kimi-K3</th><td><span class="rm-cell" style="--k:0.100">40.6<span class="vh"> rank 10 of 11</span></span></td><td><span class="rm-cell" style="--k:0.100">+14.7<span class="vh"> rank 10 of 11</span></span></td><td><span class="rm-cell" style="--k:0.500">8.6<span class="vh"> rank 6 of 11</span></span></td><td><span class="rm-cell" style="--k:0.700">1.76<span class="vh"> rank 4 of 11</span></span></td><td><span class="rm-cell" style="--k:0.286">14.6<span class="vh"> rank 6 of 8</span></span></td></tr><tr><th scope="row">DeepSeek-V4.1</th><td><span class="rm-cell" style="--k:0.700">72.1<span class="vh"> rank 4 of 11</span></span></td><td><span class="rm-cell" style="--k:0.000">+11.3<span class="vh"> rank 11 of 11</span></span></td><td><span class="rm-cell" style="--k:0.200">6.4<span class="vh"> rank 9 of 11</span></span></td><td><span class="rm-cell" style="--k:0.100">4.98<span class="vh"> rank 10 of 11</span></span></td><td><span class="rm-cell" style="--k:1.000">29.4<span class="vh"> rank 1 of 8</span></span></td></tr><tr><th scope="row">HY4</th><td><span class="rm-cell" style="--k:0.300">55.1<span class="vh"> rank 8 of 11</span></span></td><td><span class="rm-cell" style="--k:0.300">+16.3<span class="vh"> rank 8 of 11</span></span></td><td><span class="rm-cell" style="--k:0.100">5.7<span class="vh"> rank 10 of 11</span></span></td><td><span class="rm-cell" style="--k:0.600">2.10<span class="vh"> rank 5 of 11</span></span></td><td><span class="rm-cell" style="--k:0.000">10.3<span class="vh"> rank 8 of 8</span></span></td></tr><tr class=ours><th scope="row">Qwen3.8-27B</th><td><span class="rm-cell" style="--k:1.000">84.0<span class="vh"> rank 1 of 11</span></span></td><td><span class="rm-cell" style="--k:0.700">+25.6<span class="vh"> rank 4 of 11</span></span></td><td><span class="rm-cell" style="--k:0.000">4.7<span class="vh"> rank 11 of 11</span></span></td><td><span class="rm-cell" style="--k:0.000">5.75<span class="vh"> rank 11 of 11</span></span></td><td><span class="rm-cell rm-na">n/a<span class="vh"> not comparable</span></span></td></tr><tr class=ours><th scope="row">CoPlayer (SFT)</th><td><span class="rm-cell" style="--k:0.200">55.0<span class="vh"> rank 9 of 11</span></span></td><td><span class="rm-cell" style="--k:0.900">+39.9<span class="vh"> rank 2 of 11</span></span></td><td><span class="rm-cell" style="--k:0.900">29.0<span class="vh"> rank 2 of 11</span></span></td><td><span class="rm-cell" style="--k:1.000">0.45<span class="vh"> rank 1 of 11</span></span></td><td><span class="rm-cell rm-na">n/a<span class="vh"> not comparable</span></span></td></tr><tr class=ours><th scope="row">CoPlayer</th><td><span class="rm-cell" style="--k:0.600">67.4<span class="vh"> rank 5 of 11</span></span></td><td><span class="rm-cell" style="--k:1.000">+43.7<span class="vh"> rank 1 of 11</span></span></td><td><span class="rm-cell" style="--k:1.000">34.3<span class="vh"> rank 1 of 11</span></span></td><td><span class="rm-cell" style="--k:0.800">0.97<span class="vh"> rank 3 of 11</span></span></td><td><span class="rm-cell rm-na">n/a<span class="vh"> not comparable</span></span></td></tr></tbody></table></div>
-<div class="rm-narrow">
-<table class="rmt" aria-label="By rank: when to speak"><thead><tr><th scope="col" style="text-align:left">Model</th><th scope="col"><span class="g">When to speak</span>Recall &uarr;</th><th scope="col"><span class="g">When to speak</span>TimingLift &uarr;</th></tr></thead><tbody><tr><th scope="row">Gemini-3.8</th><td><span class="rm-cell" style="--k:0.000">40.5<span class="vh"> rank 11 of 11</span></span></td><td><span class="rm-cell" style="--k:0.600">+22.7<span class="vh"> rank 5 of 11</span></span></td></tr><tr><th scope="row">GPT-5.6</th><td><span class="rm-cell" style="--k:0.900">73.9<span class="vh"> rank 2 of 11</span></span></td><td><span class="rm-cell" style="--k:0.800">+28.0<span class="vh"> rank 3 of 11</span></span></td></tr><tr><th scope="row">Claude-Sonnet</th><td><span class="rm-cell" style="--k:0.500">66.3<span class="vh"> rank 6 of 11</span></span></td><td><span class="rm-cell" style="--k:0.500">+20.8<span class="vh"> rank 6 of 11</span></span></td></tr><tr><th scope="row">Doubao-2.1</th><td><span class="rm-cell" style="--k:0.900">73.9<span class="vh"> rank 2 of 11</span></span></td><td><span class="rm-cell" style="--k:0.400">+18.6<span class="vh"> rank 7 of 11</span></span></td></tr><tr><th scope="row">Qwen3.8-Max</th><td><span class="rm-cell" style="--k:0.400">57.0<span class="vh"> rank 7 of 11</span></span></td><td><span class="rm-cell" style="--k:0.200">+16.2<span class="vh"> rank 9 of 11</span></span></td></tr><tr><th scope="row">Kimi-K3</th><td><span class="rm-cell" style="--k:0.100">40.6<span class="vh"> rank 10 of 11</span></span></td><td><span class="rm-cell" style="--k:0.100">+14.7<span class="vh"> rank 10 of 11</span></span></td></tr><tr><th scope="row">DeepSeek-V4.1</th><td><span class="rm-cell" style="--k:0.700">72.1<span class="vh"> rank 4 of 11</span></span></td><td><span class="rm-cell" style="--k:0.000">+11.3<span class="vh"> rank 11 of 11</span></span></td></tr><tr><th scope="row">HY4</th><td><span class="rm-cell" style="--k:0.300">55.1<span class="vh"> rank 8 of 11</span></span></td><td><span class="rm-cell" style="--k:0.300">+16.3<span class="vh"> rank 8 of 11</span></span></td></tr><tr class=ours><th scope="row">Qwen3.8-27B</th><td><span class="rm-cell" style="--k:1.000">84.0<span class="vh"> rank 1 of 11</span></span></td><td><span class="rm-cell" style="--k:0.700">+25.6<span class="vh"> rank 4 of 11</span></span></td></tr><tr class=ours><th scope="row">CoPlayer (SFT)</th><td><span class="rm-cell" style="--k:0.200">55.0<span class="vh"> rank 9 of 11</span></span></td><td><span class="rm-cell" style="--k:0.900">+39.9<span class="vh"> rank 2 of 11</span></span></td></tr><tr class=ours><th scope="row">CoPlayer</th><td><span class="rm-cell" style="--k:0.600">67.4<span class="vh"> rank 5 of 11</span></span></td><td><span class="rm-cell" style="--k:1.000">+43.7<span class="vh"> rank 1 of 11</span></span></td></tr></tbody></table>
-<table class="rmt" aria-label="By rank: what to say, and staying quiet and fast"><thead><tr><th scope="col" style="text-align:left">Model</th><th scope="col"><span class="g">What to say</span>StratEmo &uarr;</th><th scope="col"><span class="g">Quiet and fast</span>NoiseRate &darr;</th><th scope="col"><span class="g">Quiet and fast</span>OnTime &uarr;</th></tr></thead><tbody><tr><th scope="row">Gemini-3.8</th><td><span class="rm-cell" style="--k:0.800">14.5<span class="vh"> rank 3 of 11</span></span></td><td><span class="rm-cell" style="--k:0.900">0.64<span class="vh"> rank 2 of 11</span></span></td><td><span class="rm-cell" style="--k:0.857">19.6<span class="vh"> rank 2 of 8</span></span></td></tr><tr><th scope="row">GPT-5.6</th><td><span class="rm-cell" style="--k:0.400">7.9<span class="vh"> rank 7 of 11</span></span></td><td><span class="rm-cell" style="--k:0.500">2.25<span class="vh"> rank 6 of 11</span></span></td><td><span class="rm-cell" style="--k:0.571">17.0<span class="vh"> rank 4 of 8</span></span></td></tr><tr><th scope="row">Claude-Sonnet</th><td><span class="rm-cell" style="--k:0.600">8.8<span class="vh"> rank 5 of 11</span></span></td><td><span class="rm-cell" style="--k:0.400">2.79<span class="vh"> rank 7 of 11</span></span></td><td><span class="rm-cell" style="--k:0.714">18.1<span class="vh"> rank 3 of 8</span></span></td></tr><tr><th scope="row">Doubao-2.1</th><td><span class="rm-cell" style="--k:0.300">6.8<span class="vh"> rank 8 of 11</span></span></td><td><span class="rm-cell" style="--k:0.200">4.72<span class="vh"> rank 9 of 11</span></span></td><td><span class="rm-cell" style="--k:0.429">15.8<span class="vh"> rank 5 of 8</span></span></td></tr><tr><th scope="row">Qwen3.8-Max</th><td><span class="rm-cell" style="--k:0.700">12.3<span class="vh"> rank 4 of 11</span></span></td><td><span class="rm-cell" style="--k:0.300">3.26<span class="vh"> rank 8 of 11</span></span></td><td><span class="rm-cell" style="--k:0.143">10.6<span class="vh"> rank 7 of 8</span></span></td></tr><tr><th scope="row">Kimi-K3</th><td><span class="rm-cell" style="--k:0.500">8.6<span class="vh"> rank 6 of 11</span></span></td><td><span class="rm-cell" style="--k:0.700">1.76<span class="vh"> rank 4 of 11</span></span></td><td><span class="rm-cell" style="--k:0.286">14.6<span class="vh"> rank 6 of 8</span></span></td></tr><tr><th scope="row">DeepSeek-V4.1</th><td><span class="rm-cell" style="--k:0.200">6.4<span class="vh"> rank 9 of 11</span></span></td><td><span class="rm-cell" style="--k:0.100">4.98<span class="vh"> rank 10 of 11</span></span></td><td><span class="rm-cell" style="--k:1.000">29.4<span class="vh"> rank 1 of 8</span></span></td></tr><tr><th scope="row">HY4</th><td><span class="rm-cell" style="--k:0.100">5.7<span class="vh"> rank 10 of 11</span></span></td><td><span class="rm-cell" style="--k:0.600">2.10<span class="vh"> rank 5 of 11</span></span></td><td><span class="rm-cell" style="--k:0.000">10.3<span class="vh"> rank 8 of 8</span></span></td></tr><tr class=ours><th scope="row">Qwen3.8-27B</th><td><span class="rm-cell" style="--k:0.000">4.7<span class="vh"> rank 11 of 11</span></span></td><td><span class="rm-cell" style="--k:0.000">5.75<span class="vh"> rank 11 of 11</span></span></td><td><span class="rm-cell rm-na">n/a<span class="vh"> not comparable</span></span></td></tr><tr class=ours><th scope="row">CoPlayer (SFT)</th><td><span class="rm-cell" style="--k:0.900">29.0<span class="vh"> rank 2 of 11</span></span></td><td><span class="rm-cell" style="--k:1.000">0.45<span class="vh"> rank 1 of 11</span></span></td><td><span class="rm-cell rm-na">n/a<span class="vh"> not comparable</span></span></td></tr><tr class=ours><th scope="row">CoPlayer</th><td><span class="rm-cell" style="--k:1.000">34.3<span class="vh"> rank 1 of 11</span></span></td><td><span class="rm-cell" style="--k:0.800">0.97<span class="vh"> rank 3 of 11</span></span></td><td><span class="rm-cell rm-na">n/a<span class="vh"> not comparable</span></span></td></tr></tbody></table>
-</div>
-</div>
+<div style="margin-top:clamp(44px,5vw,70px)">
+<h3 style="max-width:44ch">It speaks inside required windows &mdash; and talks more to do it.</h3>
+<p class="lede" style="margin-bottom:26px">From supervision to the final policy every column moves in the direction the reward asked for, including the two that get worse.</p>
+<div class="ba"><div class="ba-c better">
+<p class="ba-m">TimingLift</p>
+<p class="ba-v"><span class="ba-from">+39.9</span><span class="ba-ar">&rarr;</span><span class="ba-to">+43.7pp</span></p>
+<p class="ba-d">lines land in required windows</p>
+<p class="ba-tag">better</p>
+</div><div class="ba-c better">
+<p class="ba-m">HitStratEmo</p>
+<p class="ba-v"><span class="ba-from">24</span><span class="ba-ar">&rarr;</span><span class="ba-to">31.2%</span></p>
+<p class="ba-d">the first in-window line is sound and supported</p>
+<p class="ba-tag">better</p>
+</div><div class="ba-c better">
+<p class="ba-m">Recall</p>
+<p class="ba-v"><span class="ba-from">55</span><span class="ba-ar">&rarr;</span><span class="ba-to">67.4%</span></p>
+<p class="ba-d">required windows hit at step time</p>
+<p class="ba-tag">better</p>
+</div><div class="ba-c worse">
+<p class="ba-m">NoiseRate</p>
+<p class="ba-v"><span class="ba-from">0.45</span><span class="ba-ar">&rarr;</span><span class="ba-to">0.97 /min</span></p>
+<p class="ba-d">off-window chat, wrong or noise</p>
+<p class="ba-tag">worse</p>
+</div><div class="ba-c worse">
+<p class="ba-m">QuotaOver</p>
+<p class="ba-v"><span class="ba-from">16.6</span><span class="ba-ar">&rarr;</span><span class="ba-to">33.1%</span></p>
+<p class="ba-d">quiet-time periods over quota</p>
+<p class="ba-tag">worse</p>
+</div><div class="ba-c">
+<p class="ba-m">SpeakRate</p>
+<p class="ba-v"><span class="ba-from">1.1</span><span class="ba-ar">&rarr;</span><span class="ba-to">1.9 /min</span></p>
+<p class="ba-d">lines per minute</p>
+<p class="ba-tag">more talking</p>
+</div></div>
 </div>
 </section>
-</div>
 
+<div class="block-tint">
 <section class="block" id="cases" aria-labelledby="cases-h">
 <div class="block-head">
 <p class="kicker">Matched inputs</p>
@@ -1152,14 +1134,14 @@ section[id]{scroll-margin-top:72px}
 </div>
 <p class="small-note">Selected qualitative examples from the final checkpoints, not population estimates. Reactive panels use the exact cached model input; proactive panels use four-frame inputs reconstructed from the hash-verified source video with the runner's recorded sampling rule, because the original per-step cache was lost. Verdicts are the shipped Qwen3.8-Flash judge's, not human ground truth. The paper's full four-panel comparison is <a href="assets/figures/case-main-v7.png">Figure 7</a>.</p>
 </section>
+</div>
 
-<div class="block-tint">
 <section class="block" id="audit" aria-labelledby="audit-h">
 <div class="block-head">
 <p class="kicker">How far the evidence goes</p>
 <h2 id="audit-h">Fast decisions are where every model fails to be on time.</h2>
 <div class="lede">
-<p>85.4% of in-play questions carry a two-second deadline, measured from the player speaking to the moment the advice is complete. Training does not buy this back by being faster: reactive median time to first token is 1.034&nbsp;s for CoPlayer against 1.086&nbsp;s for supervision, and CoPlayer returns locatable advice on 69 of 139 advice questions against 59. Low latency still has to turn into complete, useful advice before the deadline.</p>
+<p>85.4% of in-play questions carry a two-second deadline, timed from the player speaking to the advice being complete. Being faster does not buy it back: CoPlayer's median time to first token is 1.034&nbsp;s against supervision's 1.086&nbsp;s. Low latency still has to become complete advice before the deadline.</p>
 </div>
 </div>
 <div class="columns-2">
@@ -1205,6 +1187,10 @@ section[id]{scroll-margin-top:72px}
 </tbody>
 </table>
 </div>
+<div class="table-group">
+<h3 style="max-width:40ch;margin-bottom:12px">The instrument checks, in full.</h3>
+<p class="lede" style="margin-bottom:clamp(26px,3vw,38px)">Four controls on the measurement itself: whether the lead survives removing an annotator's events, whether sharing a host moves the latency, whether raters agree with the judge, and whether they agree with each other.</p>
+<div class="table-grid">
 <div class="table-module" id="t-bias">
 <p class="table-insight">The lead is not an artifact of who wrote the ground truth: without Claude-Opus-5.5&rsquo;s events CoPlayer scores 28.4 against the best frontier model&rsquo;s 10.5.</p>
 <table data-tex-label="tab:bias">
@@ -1250,7 +1236,6 @@ section[id]{scroll-margin-top:72px}
 </tbody>
 </table>
 </div>
-<div class="table-pair">
 <div class="table-module narrow" id="t-humaneval">
 <p class="table-insight">Four raters agreed with the judge on 88.2% to 98.8% of replies &mdash; starting from its prefilled labels.</p>
 <table data-tex-label="tab:human_eval">
@@ -1285,6 +1270,7 @@ section[id]{scroll-margin-top:72px}
 </table>
 </div>
 </div>
+</div>
 <div class="table-side">
 <div class="table-module narrow" id="t-rho">
 <p class="table-insight">Human and judge rankings track closely on support and the joint criterion, and not at all on reactive strategy.</p>
@@ -1306,39 +1292,22 @@ section[id]{scroll-margin-top:72px}
 </table>
 </div>
 <div class="table-side-note">
-<p><b>Reactive strategy is the one ranking that does not hold.</b> Human and judge means take only six and seven distinct values there, so the rank correlation is both low and not significant. Support and the joint criterion track closely on both tracks.</p>
-<p class="small-note">Row-weighting or excluding the shared replies leaves support and joint correlations close to primary; reactive strategy rises only when the shared replies are row-weighted.</p>
+<p><b>Reactive strategy is the one ranking that does not hold.</b> Human and judge means take only six and seven distinct values there, so the correlation is both low and not significant. Support and the joint criterion track closely on both tracks.</p>
 </div>
 </div>
-<div class="table-module narrow" id="t-acronyms">
-<p class="table-insight">Every metric on this page, defined once. Two carry the claims: StratEmo and TimingLift.</p>
-<table data-tex-label="tab:acronyms">
-<caption><b>Table 7.</b> Metric abbreviations used in Table 2 and Table 3, with definitions for every reported metric.</caption>
-<thead>
-<tr><th scope="col" class="l">Acronym</th><th scope="col" class="l">Meaning</th><th scope="col" class="l">Acronym</th><th scope="col" class="l">Meaning</th></tr>
-</thead>
-<tbody>
-<tr><th scope="row" data-label="Acronym">GroundF1</th><td class="l" data-label="Meaning">must-mention F1, wrong claims as false positives</td><th scope="row" data-label="Acronym">StratAcc</th><td class="l" data-label="Meaning">advice questions with sound strategy</td></tr>
-<tr><th scope="row" data-label="Acronym">FactAcc</th><td class="l" data-label="Meaning">verifiable facts correct</td><th scope="row" data-label="Acronym">EmoAcc</th><td class="l" data-label="Meaning">player emotion recognized</td></tr>
-<tr><th scope="row" data-label="Acronym">SupQual</th><td class="l" data-label="Meaning">support score 0–4, rescaled</td><th scope="row" data-label="Acronym">StratEmo</th><td class="l" data-label="Meaning">sound strategy with support ≥3</td></tr>
-<tr><th scope="row" data-label="Acronym">TTFT</th><td class="l" data-label="Meaning">time to first visible token</td><th scope="row" data-label="Acronym">TTUA</th><td class="l" data-label="Meaning">time until useful advice is complete</td></tr>
-<tr><th scope="row" data-label="Acronym">OnTime</th><td class="l" data-label="Meaning">advice complete by its deadline (TTUA)</td><th scope="row" data-label="Acronym">OnTime-F</th><td class="l" data-label="Meaning">OnTime under a fixed deadline</td></tr>
-<tr><th scope="row" data-label="Acronym">Violation</th><td class="l" data-label="Meaning">reply violates a must-not item</td><th scope="row" data-label="Acronym">LenOK</th><td class="l" data-label="Meaning">reply within the word limit</td></tr>
-<tr><th scope="row" data-label="Acronym">Recall</th><td class="l" data-label="Meaning">required windows hit at step time</td><th scope="row" data-label="Acronym">Recall-S</th><td class="l" data-label="Meaning">hit by first-token arrival</td></tr>
-<tr><th scope="row" data-label="Acronym">RandBase</th><td class="l" data-label="Meaning">random speaker, same utterance count</td><th scope="row" data-label="Acronym">TimingLift</th><td class="l" data-label="Meaning">Recall minus RandBase</td></tr>
-<tr><th scope="row" data-label="Acronym">SeenRate</th><td class="l" data-label="Meaning">required windows with an observed step</td><th scope="row" data-label="Acronym">Recall-O</th><td class="l" data-label="Meaning">recall on observed windows</td></tr>
-<tr><th scope="row" data-label="Acronym">HitStrat</th><td class="l" data-label="Meaning">sound strategy in first in-window line</td><th scope="row" data-label="Acronym">HitSup</th><td class="l" data-label="Meaning">support score of that line</td></tr>
-<tr><th scope="row" data-label="Acronym">HitStratEmo</th><td class="l" data-label="Meaning">sound strategy and support ≥3</td><th scope="row" data-label="Acronym">SpeakRate</th><td class="l" data-label="Meaning">lines per minute</td></tr>
-<tr><th scope="row" data-label="Acronym">NoiseRate</th><td class="l" data-label="Meaning">outside-window chat, wrong or noise per minute</td><th scope="row" data-label="Acronym">QuotaOver</th><td class="l" data-label="Meaning">quiet-time periods over quota</td></tr>
-</tbody>
-</table>
+</section>
+
+<div class="block-tint">
+<section class="block" id="limits" aria-labelledby="limits-h">
+<div class="block-head">
+<p class="kicker">Honest limits</p>
+<h2 id="limits-h">A companion needs more than benchmark scores.</h2>
+<div class="lede">
+<p>CoPlayer is better at this than the models tested against it, and still not a reliable game companion. What the paper reports about its own boundaries:</p>
 </div>
-<div style="margin-top:clamp(42px,5vw,68px)">
-<h3 style="max-width:34ch">A companion needs more than benchmark scores.</h3>
-<p class="lede" style="margin-bottom:26px">CoPlayer is better at this than the models tested against it, and still not a reliable game companion. What the paper reports about its own boundaries:</p>
+</div>
 <div class="limits"><div class="limit"><h3>Two thirds of advice questions still fail.</h3><p>StratEmo is 34.3 where the reference replies score 99.1, so sound advice with fitting support remains the exception rather than the rule <span class="src">(Table 2)</span>.</p></div><div class="limit"><h3>The proactive policy talks more to hit more.</h3><p>It misses 31.1% of the windows it observes and roughly doubles NoiseRate against the supervised checkpoint it starts from, 0.97 against 0.45 lines per minute <span class="src">(Table 3)</span>.</p></div><div class="limit"><h3>Advice is often late, or never complete.</h3><p>85.4% of in-play questions carry a 2&nbsp;s deadline. In the serial retest CoPlayer returns locatable advice on 69 of 139 advice questions, and local latency is not comparable with the frontier models' API latency <span class="src">(Table 5)</span>.</p></div><div class="limit"><h3>Scores come from a model judge.</h3><p>Qwen3.8-Flash scores every reply. Human review started from its prefilled labels, so it supports judge-based model ranking, not event-level correctness &mdash; and reactive strategy rankings agree only weakly <span class="src">(&rho; = 0.421, p = 0.197; Table 11)</span>.</p></div><div class="limit"><h3>The final checkpoints are benchmark-informed retests.</h3><p>Earlier full-benchmark metrics shaped the reward design and the choice of proactive reward profile, although no Bench video or reference reply enters training at any stage.</p></div><div class="limit"><h3>The setting is recorded, not live.</h3><p>Player questions are simulated, card and board annotations use engine analysis, 198 questions (2.2%) keep a future-referencing reference reply, and audio and long-term memory are absent.</p></div></div>
 <p class="small-note">Event annotations are human-verified but may contain residual errors, and human review of judge consistency does not establish event-level correctness. Further annotation audits, correct and supportive advice, timely intervention and appropriate silence remain priorities.</p>
-</div>
 </section>
 </div>
 
