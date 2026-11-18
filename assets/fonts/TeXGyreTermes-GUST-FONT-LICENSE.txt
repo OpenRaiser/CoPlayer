@@ -1,0 +1,11 @@
+TeX Gyre Termes
+Copyright 2006, 2009 for TeX Gyre extensions by B. Jackowski and J.M. Nowacki
+(on behalf of TeX users groups).
+
+This work is released under the GUST Font License (GFL), which is legally
+equivalent to the LaTeX Project Public License (LPPL), version 1.3c or later.
+Full text: http://tug.org/fonts/licenses/GUST-FONT-LICENSE.txt
+
+The .woff2 files in this directory are subsets of the OTF files shipped inside the
+paper package at scripts/figure_v6/html/assets/fonts/, produced with fontTools
+subset; the copyright and licence name records are preserved inside each file.

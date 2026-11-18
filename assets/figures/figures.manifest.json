@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "directory": ".",
+  "source_root": "CVPR27_CoPlay (paper package)",
+  "assets": [
+    {
+      "source": "fig/CoPlayBench-Figure1-spaced.pdf",
+      "output": "coplaybench-figure1-spaced.png",
+      "kind": "raster-from-pdf",
+      "page": null,
+      "width": 1250,
+      "height": 1435,
+      "aspect_ratio": 0.8711,
+      "dpi": 180,
+      "webp": "coplaybench-figure1-spaced.webp",
+      "paper_figure": "Figure 1",
+      "alt": "An Honor of Kings teamfight frame, score 6 to 8. A frustrated player says: I haven't died once, and we're still about to lose. Reply (a), marked not strategy-grounded: The situation looks bad, and a comeback seems unlikely. But it's not your fault. Reply (b), marked strategy-grounded: Zero deaths, you're the reason we're still in it! Save your immunity for their dive and flip this fight.",
+      "notes": [
+        "flattened onto white"
+      ]
+    },
+    {
+      "source": "fig/CoPlayBench-figure2.pdf",
+      "output": "coplaybench-figure2.png",
+      "kind": "raster-from-pdf",
+      "page": null,
+      "width": 2395,
+      "height": 1195,
+      "aspect_ratio": 2.0042,
+      "dpi": 180,
+      "webp": "coplaybench-figure2.webp",
+      "paper_figure": "Figure 2",
+      "alt": "Two-part diagram. (a) Building CoPlayBench: 2,534 first-person videos from 9 games are annotated independently by Claude-Opus-5.5, GPT-6.1-Sol and Gemini-4-Argon; events whose time spans overlap are retained, 21,494 to 15,689 events. One retained Honor of Kings teamfight shows a player question, a 728 to 732 second pre-event alert window, a reference reply and a must-not item. (b) Evaluation: the reactive track answers from 16 frames of the last 60 seconds and is scored on game, player and time; the proactive track observes every step, and a timeline shows two required windows hit and one missed.",
+      "notes": [
+        "flattened onto white",
+        "cropped as the paper prints it: \\cleanfig[trim=-2bp 17bp 2bp 45bp,clip]"
+      ]
+    },
+    {
+      "source": "fig/result_P.pdf",
+      "output": "result-p.png",
+      "kind": "raster-from-pdf",
+      "page": null,
+      "width": 2422,
+      "height": 693,
+      "aspect_ratio": 3.4949,
+      "dpi": 256,
+      "webp": "result-p.webp",
+      "paper_figure": "Figure 3",
+      "alt": "Three donut charts give each game's share of 818 videos, 97.7 hours and 5,153 events; Honor of Kings holds 27% of hours and 18% of events. Below, per-game bars show the median required window, from 4.0 s in Go to 8.0 s in Honor of Kings, Plants vs. Zombies 2 and Stardew Valley, and the share of video time inside required windows, from 0.8% in Stardew Valley to 27.0% in Dou Dizhu.",
+      "notes": [
+        "flattened onto white"
+      ]
+    },
+    {
+      "source": "fig/result_D.pdf",
+      "output": "result-d.png",
+      "kind": "raster-from-pdf",
+      "page": null,
+      "width": 2422,
+      "height": 726,
+      "aspect_ratio": 3.3361,
+      "dpi": 256,
+      "webp": "result-d.webp",
+      "paper_figure": "Figure 4",
+      "alt": "Four panels. (a) The four most frequent event types per game; Honor of Kings events are all teamfights. (b) Box plots of required window width, medians 4 to 8 seconds. (c) Player emotion: hesitant 29%, nervous 23%, excited 18%, then anxious, smug, irritated, frustrated, calm and defiant. (d) Expected tone: hyped 41%, short and fiery 39%, big praise 11%, playful comfort 7%, warm encouragement 2%.",
+      "notes": [
+        "flattened onto white"
+      ]
+    },
+    {
+      "source": "fig/coplayer_method_illustrated_v1.pdf",
+      "output": "coplayer-method-illustrated-v1.png",
+      "kind": "raster-from-pdf",
+      "page": null,
+      "width": 2401,
+      "height": 1174,
+      "aspect_ratio": 2.0451,
+      "dpi": 256,
+      "webp": "coplayer-method-illustrated-v1.webp",
+      "paper_figure": "Figure 5",
+      "alt": "Method diagram. (a) A play session: an illustrated game scene with a player question and a stream every delta t; CoPlayer says: It's charging. Dodge left, then heal. (b) Learning to accompany: one shared supervised model on a Qwen3.8-27B backbone with the vision tower frozen, then two separate reinforcement-learning runs. The reactive run uses a training-only reward judge for content, emotion and format; the proactive run uses a decision-first reward. Only the weights are deployed: answer the player's question, or at every step speak or stay silent.",
+      "notes": [
+        "flattened onto white"
+      ]
+    },
+    {
+      "source": "fig/figure6_groundf1_timinglift_v7.pdf",
+      "output": "figure6-groundf1-timinglift-v7.png",
+      "kind": "raster-from-pdf",
+      "page": null,
+      "width": 2200,
+      "height": 762,
+      "aspect_ratio": 2.8871,
+      "dpi": 320,
+      "webp": "figure6-groundf1-timinglift-v7.webp",
+      "paper_figure": "Figure 6",
+      "alt": "Two bar charts. (a) GroundF1 in percent: the CoPlayer stack reads 26.7 for the base model, 48.8 after supervised fine-tuning and 55.1 after reinforcement learning; frontier models follow at GPT-5.6 42.1, Gemini-3.8 39.7, Claude-5.5 38.6, HY4 34.6, Qwen-3.8 34.3, Doubao-2.1 34.3, Kimi-K3 33.4 and DeepSeek-V4.1 31.4. (b) TimingLift in percentage points: CoPlayer 25.6, 39.9 and 43.7; then GPT-5.6 28.0, Gemini-3.8 22.7, Claude-5.5 20.8, Doubao-2.1 18.6, HY4 16.3, Qwen-3.8 16.2, Kimi-K3 14.7 and DeepSeek-V4.1 11.3.",
+      "notes": [
+        "flattened onto white"
+      ]
+    },
+    {
+      "source": "fig/case_main_v7.pdf",
+      "output": "case-main-v7.png",
+      "kind": "raster-from-pdf",
+      "page": null,
+      "width": 2401,
+      "height": 2130,
+      "aspect_ratio": 1.1272,
+      "dpi": 256,
+      "webp": "case-main-v7.webp",
+      "paper_figure": "Figure 7",
+      "alt": "Four matched-input comparisons of CoPlayer, GPT-5.6-Sol and DeepSeek-V4.1-Flash, each with the input frame, a timeline, the three quoted lines and the judge verdict. (a) Reactive, Carrot Fantasy, asked at 76 seconds. (b) Proactive, Plants vs. Zombies 2, decision step 136 seconds. (c) Reactive, Stardew Valley, asked at 602 seconds. (d) Proactive, Dou Dizhu, decision step 50 seconds. CoPlayer's line is judged sound with support of 3 or 4 out of 4 in all four panels; the other two models are judged not sound in each.",
+      "notes": [
+        "flattened onto white"
+      ]
+    },
+    {
+      "source": "fig/result_A.pdf",
+      "output": "result-a.png",
+      "kind": "raster-from-pdf",
+      "page": null,
+      "width": 1149,
+      "height": 875,
+      "aspect_ratio": 1.3131,
+      "dpi": 256,
+      "webp": "result-a.webp",
+      "paper_figure": "Figure 9a",
+      "alt": "Scatter of recall against lines per minute for eight frontier models. A dashed curve shows a random speaker with the same number of lines; each model's filled point sits above its open random-speaker point, and the vertical bar between them is TimingLift. Labelled: Gemini-3.8 +22.7 at 1.5 lines per minute, GPT-5.6 +28.0 at 5.4, DeepSeek-V4.1 +11.3 at 8.8.",
+      "notes": [
+        "flattened onto white"
+      ]
+    },
+    {
+      "source": "fig/result_B.pdf",
+      "output": "result-b.png",
+      "kind": "raster-from-pdf",
+      "page": null,
+      "width": 1170,
+      "height": 669,
+      "aspect_ratio": 1.7489,
+      "dpi": 256,
+      "webp": "result-b.webp",
+      "paper_figure": "Figure 9b",
+      "alt": "Two cumulative curves of the share of reactive questions whose advice is complete, by seconds after the player speaks. During play, with deadlines shaded at 2 and 5 seconds, every curve stays below about 40% at 12 seconds and few replies finish inside the deadline. After the event, with a 10 second deadline, DeepSeek-V4.1 rises fastest and the curves end between about 25% and 60%.",
+      "notes": [
+        "flattened onto white"
+      ]
+    },
+    {
+      "source": "fig/human_rank_grid.pdf",
+      "output": "human-rank-grid.png",
+      "kind": "raster-from-pdf",
+      "page": null,
+      "width": 2200,
+      "height": 1376,
+      "aspect_ratio": 1.5988,
+      "dpi": 320,
+      "webp": "human-rank-grid.webp",
+      "paper_figure": "Figure 17",
+      "alt": "Six scatter plots of judge rank against human rank over 11 models, for strategy, support and the joint criterion on the reactive and proactive tracks, CoPlayer in blue. Spearman rho: reactive strategy 0.421 (p = .197), support 0.931, joint 0.904; proactive strategy 0.954, support 0.929, joint 0.725.",
+      "notes": [
+        "flattened onto white"
+      ]
+    },
+    {
+      "source": "scripts/figure_v6/frames/pvz_068_k34_grid.jpg",
+      "output": "pvz-068-k34-grid.jpg",
+      "kind": "raster",
+      "page": null,
+      "width": 960,
+      "height": 480,
+      "aspect_ratio": 2.0,
+      "dpi": null,
+      "webp": "pvz-068-k34-grid.webp",
+      "paper_figure": "Figure 7b input",
+      "alt": "Four consecutive Plants vs. Zombies 2 frames in a 2 by 2 grid: an ice-level lawn with plants on the left and zombies advancing from the right.",
+      "notes": []
+    }
+  ]
+}
