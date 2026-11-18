@@ -166,14 +166,14 @@
     },
     {
       "source": "scripts/figure_v6/frames/pvz_068_k34_grid.jpg",
-      "output": "pvz-068-k34-grid.jpg",
+      "output": "pvz-068-k34-frames.jpg",
       "kind": "raster",
       "page": null,
       "width": 960,
       "height": 480,
       "aspect_ratio": 2.0,
       "dpi": null,
-      "webp": "pvz-068-k34-grid.webp",
+      "webp": "pvz-068-k34-frames.webp",
       "paper_figure": "Figure 7b input",
       "alt": "Four consecutive Plants vs. Zombies 2 frames in a 2 by 2 grid: an ice-level lawn with plants on the left and zombies advancing from the right.",
       "notes": []
