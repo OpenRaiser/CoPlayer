@@ -177,6 +177,118 @@
       "paper_figure": "Figure 7b input",
       "alt": "Four consecutive Plants vs. Zombies 2 frames in a 2 by 2 grid: an ice-level lawn with plants on the left and zombies advancing from the right.",
       "notes": []
+    },
+    {
+      "source": "scripts/figure_v6/frames/doudizhu_046_k25_grid.jpg",
+      "output": "doudizhu-046-k25-grid.jpg",
+      "kind": "raster",
+      "page": null,
+      "width": 1280,
+      "height": 720,
+      "aspect_ratio": 1.7778,
+      "dpi": null,
+      "webp": "doudizhu-046-k25-grid.webp",
+      "paper_figure": "Figure 7d input",
+      "alt": "Four consecutive Dou Dizhu frames in a 2 by 2 grid: the player hand along the bottom and three seats around a green table.",
+      "notes": [
+        "recorded model input frame from the paper package"
+      ]
+    },
+    {
+      "source": "scripts/figure_v6/frames/case_sdv_301_input_t602.png",
+      "output": "case-sdv-301-input-t602.png",
+      "kind": "raster",
+      "page": null,
+      "width": 640,
+      "height": 361,
+      "aspect_ratio": 1.7729,
+      "dpi": null,
+      "webp": "case-sdv-301-input-t602.webp",
+      "paper_figure": "Figure 14 input",
+      "alt": "A Stardew Valley frame in the Skull Cavern: the mine floor in darkness with the health and energy bars at the lower right.",
+      "notes": [
+        "recorded model input frame from the paper package"
+      ]
+    },
+    {
+      "source": "scripts/figure_v6/frames/detail_sdv_energy_t602.png",
+      "output": "detail-sdv-energy-t602.png",
+      "kind": "raster",
+      "page": null,
+      "width": 144,
+      "height": 360,
+      "aspect_ratio": 0.4,
+      "dpi": null,
+      "webp": "detail-sdv-energy-t602.webp",
+      "paper_figure": "Figure 14 inset",
+      "alt": "The health and energy bars magnified: the energy bar is nearly empty and turned orange.",
+      "notes": [
+        "recorded model input frame from the paper package"
+      ]
+    },
+    {
+      "source": "scripts/figure_v6/frames/case_carrot_051_input_t76.png",
+      "output": "case-carrot-051-input-t76.png",
+      "kind": "raster",
+      "page": null,
+      "width": 640,
+      "height": 361,
+      "aspect_ratio": 1.7729,
+      "dpi": null,
+      "webp": "case-carrot-051-input-t76.webp",
+      "paper_figure": "Figure 7a input",
+      "alt": "A Carrot Fantasy frame: the lane is clear of obstacles, towers stand along the path and the carrot is at full health.",
+      "notes": [
+        "recorded model input frame from the paper package"
+      ]
+    },
+    {
+      "source": "scripts/figure_v5/frames/case_hs_135_input_t8.png",
+      "output": "case-hs-135-input-t8.png",
+      "kind": "raster",
+      "page": null,
+      "width": 640,
+      "height": 361,
+      "aspect_ratio": 1.7729,
+      "dpi": null,
+      "webp": "case-hs-135-input-t8.webp",
+      "paper_figure": "Figure 13 input",
+      "alt": "A Hearthstone mulligan screen with three cards in the opening hand.",
+      "notes": [
+        "recorded model input frame from the paper package"
+      ]
+    },
+    {
+      "source": "scripts/figure_v6/frames/uno_018_k75_grid.jpg",
+      "output": "uno-018-k75-grid.jpg",
+      "kind": "raster",
+      "page": null,
+      "width": 1280,
+      "height": 720,
+      "aspect_ratio": 1.7778,
+      "dpi": null,
+      "webp": "uno-018-k75-grid.webp",
+      "paper_figure": "Figure 15a input",
+      "alt": "Four consecutive UNO frames in a 2 by 2 grid: the discard pile in the centre and the player hand below.",
+      "notes": [
+        "recorded model input frame from the paper package"
+      ]
+    },
+    {
+      "source": "scripts/figure_v6/frames/majang_122_k48_grid.jpg",
+      "output": "majang-122-k48-grid.jpg",
+      "kind": "raster",
+      "page": null,
+      "width": 1280,
+      "height": 720,
+      "aspect_ratio": 1.7778,
+      "dpi": null,
+      "webp": "majang-122-k48-grid.webp",
+      "paper_figure": "Figure 15 input",
+      "alt": "Four consecutive Mahjong frames in a 2 by 2 grid: the player tiles along the bottom of a green table.",
+      "notes": [
+        "recorded model input frame from the paper package"
+      ]
     }
   ]
 }
