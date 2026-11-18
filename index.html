@@ -1420,7 +1420,7 @@ dialog.zoom img{display:block;max-width:96vw;max-height:84vh;width:auto;height:a
 </footer>
 
 <dialog class="zoom" id="zoom" aria-label="Enlarged figure">
-<img id="zoom-img" alt="Enlarged figure; the caption is shown below it">
+<img id="zoom-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Enlarged figure; the caption is shown below it">
 <div class="zoom-bar"><p id="zoom-cap"></p><button class="zoom-close" id="zoom-close" type="button">Close</button></div>
 </dialog>
 
@@ -1440,7 +1440,8 @@ dialog.zoom img{display:block;max-width:96vw;max-height:84vh;width:auto;height:a
     });
     dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
     var cb=document.getElementById('zoom-close'); if(cb)cb.addEventListener('click',function(){dlg.close()});
-    dlg.addEventListener('close',function(){zi.removeAttribute('src')});
+    var ph=zi.getAttribute('src');
+    dlg.addEventListener('close',function(){zi.src=ph});
   }
 
   var cp=document.getElementById('copy-bib');
