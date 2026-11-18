@@ -1,0 +1,125 @@
+# GRPO settings shared by both CoPlayer policies (verl 5b79827b, merged on top of verl's ppo_trainer config).
+# launch.py fills in the paths (data, SFT checkpoint, reward function, output dirs); track settings are in reactive.yaml /
+# proactive.yaml. Any key can be overridden on the launch.py command line, e.g. trainer.nnodes=2.
+
+algorithm:
+  adv_estimator: grpo
+  norm_adv_by_std_in_grpo: true
+  use_kl_in_reward: false
+  filter_groups:
+    enable: false
+
+data:
+  train_batch_size: 24
+  val_batch_size: 24
+  val_max_samples: 180
+  max_prompt_length: 6144
+  max_response_length: 1024
+  filter_overlong_prompts: true
+  filter_overlong_prompts_workers: 8
+  truncation: error
+  image_key: images
+  image_patch_size: null
+  shuffle: false                       # the RL rows are already in training order
+  dataloader_num_workers: 4
+  apply_chat_template_kwargs:
+    enable_thinking: false
+
+actor_rollout_ref:
+  model:
+    use_remove_padding: true
+    enable_gradient_checkpointing: true
+  actor:
+    strategy: fsdp2
+    freeze_vision_tower: true
+    optim:
+      lr: 0.000001
+    ppo_mini_batch_size: 24
+    ppo_micro_batch_size_per_gpu: 1
+    use_dynamic_bsz: false
+    use_kl_loss: true
+    kl_loss_coef: 0.005
+    kl_loss_type: low_var_kl
+    entropy_coeff: 0
+    use_torch_compile: false
+    entropy_from_logits_with_chunking: true
+    fsdp_config:
+      fsdp_size: 24
+      param_offload: true
+      optimizer_offload: true
+      offload_policy: true
+      reshard_after_forward: true
+      entropy_checkpointing: true
+      ulysses_sequence_parallel_size: 1
+  ref:
+    strategy: fsdp2
+    log_prob_micro_batch_size_per_gpu: 1
+    use_torch_compile: false
+    entropy_from_logits_with_chunking: true
+    fsdp_config:
+      fsdp_size: 24
+      param_offload: true
+      offload_policy: true
+      reshard_after_forward: true
+      ulysses_sequence_parallel_size: 1
+  rollout:
+    name: vllm
+    n: 8                               # GRPO group size
+    temperature: 1.0
+    tensor_model_parallel_size: 4
+    gpu_memory_utilization: 0.5
+    max_model_len: 8192
+    max_num_seqs: 64
+    max_num_batched_tokens: 8192
+    log_prob_micro_batch_size_per_gpu: 1
+    ignore_eos: false
+    enable_chunked_prefill: true
+    enable_prefix_caching: false
+    free_cache_engine: true
+    enforce_eager: true
+    checkpoint_engine:
+      update_weights_bucket_megabytes: 2048
+    val_kwargs:
+      temperature: 0.3
+      do_sample: true
+      n: 1
+
+reward:
+  num_workers: 8
+  custom_reward_function:
+    name: compute_score
+  reward_manager:
+    name: naive
+  reward_model:
+    enable: false
+
+trainer:
+  use_v1: true
+  v1:
+    trainer_mode: sync
+  logger:
+    - console
+    - tensorboard
+  project_name: CoPlayer
+  nnodes: 3
+  n_gpus_per_node: 8
+  balance_batch: false
+  total_epochs: 20
+  total_training_steps: 200
+  save_freq: 50
+  test_freq: 50
+  val_before_train: true
+  resume_mode: auto
+  max_actor_ckpt_to_keep: 2
+
+transfer_queue:
+  enable: true
+
+ray_kwargs:
+  ray_init:
+    address: auto
+    runtime_env:
+      env_vars:
+        VLLM_NO_USAGE_STATS: '1'
+        DO_NOT_TRACK: '1'
+        VLLM_ALLOW_RUNTIME_LORA_UPDATING: '0'

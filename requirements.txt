@@ -1,0 +1,2 @@
+# benchmark (evaluation): Python >= 3.10 and an ffmpeg binary on PATH (or FFMPEG=/path/to/ffmpeg)
+requests>=2.28

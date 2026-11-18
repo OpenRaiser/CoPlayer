@@ -1,0 +1,11 @@
+# GRPO stage (verl), as used for the paper (Python 3.12, CUDA 12.9). Install verl from source at the pinned commit
+# together with its own requirements (vLLM rollout, transfer_queue, ...), then pin these:
+#   git clone https://github.com/verl-project/verl.git && cd verl && git checkout 5b79827b && pip install -e .
+--extra-index-url https://download.pytorch.org/whl/cu129
+torch==2.13.0+cu129
+ray==2.55.1
+flash-attn==2.8.3.post2
+hydra-core
+pyarrow
+requests
+# reward judge server (training/rl/serve_judge.sh), separate environment: vllm==0.33.0

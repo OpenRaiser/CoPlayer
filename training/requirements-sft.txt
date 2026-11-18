@@ -1,0 +1,14 @@
+# Shared SFT stage (LlamaFactory) and vLLM serving, as used for the paper (Python 3.12, CUDA 12.9)
+--extra-index-url https://download.pytorch.org/whl/cu129
+torch==2.13.0+cu129
+torchvision==0.28.0+cu129
+torchaudio==2.11.0+cu129
+transformers==5.8.0
+deepspeed==0.19.9
+liger-kernel==0.8.5
+flash-linear-attention
+qwen-vl-utils
+tensorboard
+llamafactory @ git+https://github.com/hiyouga/LlamaFactory.git@a3e7f60ae68a9a836fd878a9745a28b62ad33881
+# vLLM 0.28.0 (cu129 wheel from the vLLM GitHub release v0.28.0): newer vLLM needs transformers > 5.8.0,
+# which this LlamaFactory commit does not accept

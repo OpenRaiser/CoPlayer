@@ -1,0 +1,33 @@
+# Proactive policy: batches of 40 steps x 8 samples, KL 0.01, 200 steps on 5 x 8 GPUs, no CPU offload.
+# Validation on the fixed 720-step RL-dev set every 50 steps; checkpoints every 10.
+data:
+  train_batch_size: 40
+  val_max_samples: 720
+  validation_shuffle: false
+
+actor_rollout_ref:
+  actor:
+    ppo_mini_batch_size: 40
+    ppo_micro_batch_size_per_gpu: 2
+    kl_loss_coef: 0.01
+    fsdp_config:
+      fsdp_size: 40
+      param_offload: false
+      optimizer_offload: false
+      offload_policy: false
+  ref:
+    fsdp_config:
+      fsdp_size: 40
+      param_offload: false
+      offload_policy: false
+  rollout:
+    gpu_memory_utilization: 0.75
+    max_num_batched_tokens: 16384
+
+trainer:
+  experiment_name: coplayer_proactive
+  nnodes: 5
+  save_freq: 10
+  test_freq: 50
+  val_before_train: false
+  max_actor_ckpt_to_keep: 6

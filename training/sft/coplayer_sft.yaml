@@ -1,0 +1,62 @@
+### CoPlayer shared SFT: full-parameter fine-tuning of Qwen3.8-27B on both tracks (vision tower frozen)
+### LlamaFactory a3e7f60. Launch with training/sft/train.sh, which fills in dataset_dir / output_dir / deepspeed.
+### 1,274 steps (2 epochs over 40,757 samples) on 8 GPUs, global batch 64.
+
+### model
+model_name_or_path: Qwen/Qwen3.8-27B        # or a local path
+trust_remote_code: true
+# benchmark grids: reactive 1280x720 (~920 visual tokens each, x4), proactive 1280x720 (~880, x1). LlamaFactory's default
+# 768*768 would downscale them while vLLM inference uses the model's own processor, so allow >= 1280*722 here.
+image_max_pixels: 1048576
+image_min_pixels: 1024
+
+### method
+stage: sft
+do_train: true
+finetuning_type: full
+freeze_vision_tower: true
+freeze_multi_modal_projector: false
+freeze_language_model: false
+deepspeed: training/sft/ds_z3_config.json
+enable_liger_kernel: true
+flash_attn: auto
+
+### dataset
+dataset_dir: data/CoPlayBench/training      # dataset_info.json + sft_train.json + images/ from build_sft_data.py
+dataset: sft_train
+eval_dataset: sft_dev
+template: qwen3_8
+enable_thinking: false               # evaluation and deployment run without thinking (TTFT is a metric)
+cutoff_len: 6144                     # reactive ~4.2k tokens, proactive ~1.3k
+preprocessing_num_workers: 32
+dataloader_num_workers: 8
+
+### output
+output_dir: saves/coplayer_sft
+logging_steps: 5
+save_steps: 200
+save_total_limit: 3
+save_only_model: true
+plot_loss: true
+overwrite_output_dir: false
+report_to: tensorboard
+
+### train
+per_device_train_batch_size: 8
+gradient_accumulation_steps: 1       # 8 GPUs -> global batch 64; keep 64 on other GPU counts
+train_sampling_strategy: group_by_length
+learning_rate: 1.0e-5
+num_train_epochs: 2.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.03
+weight_decay: 0.0
+max_grad_norm: 1.0
+bf16: true
+gradient_checkpointing: true
+ddp_timeout: 180000000
+resume_from_checkpoint: null
+
+### eval
+per_device_eval_batch_size: 4
+eval_strategy: steps
+eval_steps: 200

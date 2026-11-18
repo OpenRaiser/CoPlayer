@@ -1,0 +1,14 @@
+# Reactive policy: batches of 24 questions x 8 samples, KL 0.005, 200 steps on 3 x 8 GPUs.
+# (The paper run started on 16 GPUs with fsdp_size 16 and continued on 24 from step 20; the batch is the same.)
+trainer:
+  experiment_name: coplayer_reactive
+  nnodes: 3
+  save_freq: 10
+
+actor_rollout_ref:
+  actor:
+    fsdp_config:
+      fsdp_size: 24
+  ref:
+    fsdp_config:
+      fsdp_size: 24
