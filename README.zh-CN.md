@@ -20,6 +20,7 @@
 
 <p align="center">
   <a href="https://openraiser.github.io/CoPlayer/">🌐 项目主页</a> •
+  <a href="#gameplay-demo">▶ 视频演示</a> •
   <a href="https://huggingface.co/datasets/OpenRaiser/CoPlayBench">🤗 数据集</a> •
   📄 论文（即将公开） •
   <a href="#leaderboard">🏆 排行榜</a> •
@@ -43,6 +44,18 @@
 - **CoPlayer** 基于 Qwen3.8-27B，先做两个任务共享的监督微调，再分别做两条任务各自的强化学习。在需要给建议的问题上，
   它有 **34.3%** 的回复同时给出了正确建议和贴合情境的情绪支持，8 个前沿模型中最好的只有 **14.5%**；它主动说的话落在
   标注开口窗口内的比例，也远高于说话频率相同的随机基线。
+
+<a id="gameplay-demo"></a>
+
+## ▶ 视频演示
+
+四款游戏、四个陪伴片段：**王者荣耀**的团战预警、**植物大战僵尸 2** 的防线建议、**UNO** 的跳过牌，以及**斗地主**的最后一手。
+
+<p align="center">
+  <a href="https://openraiser.github.io/CoPlayer/assets/videos/coplayer-showcase-zh.mp4"><img src="assets/gameplay-demo-poster.jpg" width="88%" alt="播放附有普通话配音和中文字幕的 CoPlayer 四游戏演示"></a>
+  <br>
+  <a href="https://openraiser.github.io/CoPlayer/assets/videos/coplayer-showcase-zh.mp4">播放中文版</a> · 1:05 · 9.11 MB
+</p>
 
 ## 🔥 动态
 

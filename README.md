@@ -19,6 +19,7 @@
 
 <p align="center">
   <a href="https://openraiser.github.io/CoPlayer/">🌐 Project Page</a> •
+  <a href="#gameplay-demo">▶ Gameplay Demo</a> •
   <a href="https://huggingface.co/datasets/OpenRaiser/CoPlayBench">🤗 Dataset</a> •
   📄 Paper (coming soon) •
   <a href="#leaderboard">🏆 Leaderboard</a> •
@@ -45,6 +46,18 @@ This repository contains the evaluation code of **CoPlayBench** and the training
   reinforcement learning. It gives correct advice with fitting support on **34.3%** of advice questions, against
   **14.5%** for the best of eight frontier models, and its unprompted lines land inside annotated speaking windows far
   more often than a frequency-matched random speaker.
+
+<a id="gameplay-demo"></a>
+
+## ▶ Gameplay Demo
+
+Four games, four moments: a teamfight warning in **Honor of Kings**, a lane defense in **Plants vs. Zombies 2**, a well-timed Skip in **UNO**, and a winning play in **Dou Dizhu**.
+
+<p align="center">
+  <a href="https://openraiser.github.io/CoPlayer/assets/videos/coplayer-showcase-en.mp4"><img src="assets/gameplay-demo-poster.jpg" width="88%" alt="Play the four-game CoPlayer demo with English voices and captions"></a>
+  <br>
+  <a href="https://openraiser.github.io/CoPlayer/assets/videos/coplayer-showcase-en.mp4">Watch in English</a> · 1:05 · 9.48 MB
+</p>
 
 ## 🔥 News
 
