@@ -28,7 +28,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/teaser.jpg" width="56%" alt="A companion must read the game and the player at once">
+  <img src="assets/teaser-side-by-side.png" width="100%" alt="A companion must read the game and the player at once">
 </p>
 
 A game companion watches the player's screen and must decide both **what to say** and **whether to speak at all**.

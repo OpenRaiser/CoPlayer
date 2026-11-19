@@ -29,7 +29,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/teaser.jpg" width="56%" alt="陪伴模型要同时读懂局面和玩家">
+  <img src="assets/teaser-side-by-side.png" width="100%" alt="陪伴模型要同时读懂局面和玩家">
 </p>
 
 游戏陪伴模型和玩家看着同一块屏幕，既要决定**说什么**，也要决定**要不要开口**。危险预警只有在玩家还来得及反应时才有用，
